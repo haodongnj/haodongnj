@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PR on Ramblings from Hao</title>
+    <link>https://haodongnj.github.io/haodongnj/tags/pr/</link>
+    <description>Recent content in PR on Ramblings from Hao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 22 Jun 2018 02:13:54 +0800</lastBuildDate>
+    
+	<atom:link href="https://haodongnj.github.io/haodongnj/tags/pr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C Language Implementation for Proportional-Resonant Controller</title>
+      <link>https://haodongnj.github.io/haodongnj/post/pr-control/</link>
+      <pubDate>Fri, 22 Jun 2018 02:13:54 +0800</pubDate>
+      
+      <guid>https://haodongnj.github.io/haodongnj/post/pr-control/</guid>
+      <description>1. Introduction to Proportional-Resonant Controller First, let&amp;rsquo;s see the transfer function of PR controller and its bode diagram:
+$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$
+where the $\omega_{r}$ is the resonant frequency.
+ As can be seen in the bode diagram, the gain at 50Hz (314 rad/s) is infinite, so PR controller can be used to track reference of specific frequency. However, the reference frequency is not always a constant, e.</description>
+    </item>
+    
+  </channel>
+</rss>

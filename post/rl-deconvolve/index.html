@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Richardson-Lucy Deconvolution | Ramblings from Hao</title>
+    <meta property="og:title" content="Richardson-Lucy Deconvolution - Ramblings from Hao">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-02-03T00:38:40&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-02-03T00:38:40&#43;08:00'>
+        
+    <meta name="Keywords" content="Blog,Control">
+    <meta name="description" content="Richardson-Lucy Deconvolution">
+        
+    <meta name="author" content="Hao Dong">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/">
+    <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
+    <link rel="stylesheet" href='/haodongnj/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
+                        Ramblings from Hao
+                    </a>
+                
+                <p class="description">What you do makes who you are</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">Richardson-Lucy Deconvolution</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月3日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="rl反卷积都干了些啥">RL反卷积都干了些啥</h2>
+<p>RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。
+损失函数是啥样的呢？</p>
+<p>$$
+J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF))
+$$</p>
+<p>且有：</p>
+<ul>
+<li>$J$，损失函数，为最小化的目标</li>
+<li>$O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像</li>
+<li>$PSF(x,y)$，Point Spread Function，点分布函数</li>
+<li>$I(x,y)$，实际拍摄到的图像</li>
+<li>$**$，二维卷积</li>
+<li>$\cdot$，按元素相乘</li>
+</ul>
+<p>既然要优化$J(O)$，那么就对O求导：</p>
+<p>$$
+\nabla J = [1 - \frac{I}{O**PSF}] ** PSF^{T}
+$$</p>
+<p>利用迭代法，就可以使代价函数最小，如下：</p>
+<p>$$
+O_{k+1} = O_{k} - \alpha \cdot \nabla J
+$$</p>
+<p>简化可得：</p>
+<p>$$
+O_{k+1} = O_{k} \cdot [\frac{I}{O_{k} ** PSF} ** PSF^{T}]
+$$</p>
+<p>按照这个迭代式，一般RL反卷积算法迭代个十几次就差不多了。</p>
+<p>但是!</p>
+<p>为什么要这么干呢？代价函数是怎么来的呢？
+这和光学设备的成像的噪声性质有关系。</p>
+<h2 id="数码噪点的泊松分布">数码噪点的泊松分布</h2>
+<pre><code>由于光线具有波粒二象性，在进行数字成像时，在像素点上的光子数量在概率上呈泊松分布。
+</code></pre>
+<p>对于某个像素点而言，曝光时的光电子数量$i$满足泊松分布：</p>
+<p>$$
+p(i) = e^{-\lambda} \cdot \frac{\lambda ^{i}}{i!}
+$$</p>
+<p>其中，$p(i)$表示像素接收到i个光电子的概率，而$\lambda$表示像素接收到的光电子数量的期望值（平均值）。</p>
+<h2 id="问题的转化极大似然估计">问题的转化：极大似然估计</h2>
+<p>考虑整个图像的联合概率为每个像素的概率的乘积：</p>
+<p>$$
+P(I) = \prod e^{-\Lambda} \cdot \frac{\Lambda^{I}}{I!}
+$$</p>
+<p>且有：</p>
+<ul>
+<li>$P(I)$：整个图像每个像素的联合概率</li>
+<li>$I$：实际拍摄到的图像数据，包含噪声，M行N列</li>
+<li>$\Lambda$：无泊松噪声的理想图像数据，M行N列</li>
+</ul>
+<p>那么很自然的，才用极大似然估计，对上式取对数，化乘为加：</p>
+<p>$$
+ln(P(I)) = - \Sigma (\Lambda - I \cdot ln(\Lambda) + ln(I!))
+$$</p>
+<p>其中，$ln(I！)$是常数项，而对于$\Lambda$，有：</p>
+<p>$$
+\Lambda = O ** PSF
+$$</p>
+<p>去掉到最大似然估计函数前面的负号以及常数项，代入上式就可以得到最小化目标的损失函数：</p>
+<p>$$
+J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF))
+$$</p>
+<h2 id="小结">小结</h2>
+<p>最大似然估计大法好。一些机器学习方法里面的贝叶斯方法也用到了最大似然估计来求参，真是有种触类旁通的感觉呢。</p>
+<h2 id="参考文献">参考文献</h2>
+<ol>
+<li><a href="https://www.strollswithmydog.com/elements-of-richardson-lucy-deconvolution/">Elements of Richardson-Lucy Deconvolution</a></li>
+<li><a href="https://www.strollswithmydog.com/richardson-lucy-algorithm/">The Richardson-Lucy Algorithm</a></li>
+<li><a href="https://www.strollswithmydog.com/photographic-sensor-simulation/">Photographic Sensor Simulation</a></li>
+<li><a href="https://qiuliang.com/digital_photography_tutorial/understand_digital_noise.htm">入门——理解数码噪点：产生原因及对拍摄的指导意义</a></li>
+<li><a href="https://www.osapublishing.org/josa/abstract.cfm?uri=josa-62-1-55">Richardson W H. Bayesian-based iterative method of image restoration[J]. JoSA, 1972, 62(1): 55-59.</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://haodongnj.github.io/haodongnj">Hao Dong</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/">https://haodongnj.github.io/haodongnj/post/rl-deconvolve/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/haodongnj/post/ros-learn/">刚开始学习ROS的一些坑(持续更新)</a></li>
+        
+        <li><a href="/haodongnj/post/life-meaning/">生活的意义</a></li>
+        
+        <li><a href="/haodongnj/about/">关于我</a></li>
+        
+        <li><a href="/haodongnj/post/rpi-rt-kernel/">树莓派实时内核编译与测试</a></li>
+        
+        <li><a href="/haodongnj/post/bodeplot/">从伯德图说起</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/haodongnj/tags/debluring'>debluring</a></li>
+                
+                <li><a href='/haodongnj/tags/psf'>PSF</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/embedded-software/">Embedded-Software (1)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/simulation/">Simulation (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/pr/">PR</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://resourcium.org" title="Resourcium">Resourcium</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.wuqingzhe.cn/" title="Blog of Wu">Qingzhe</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.haomwei.com" title="Tufu">Tufu</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

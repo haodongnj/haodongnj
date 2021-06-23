@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>MATLAB | Ramblings from Hao</title>
+    <meta property="og:title" content="MATLAB - Ramblings from Hao">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="Blog,Control">
+    <meta name="description" content="MATLAB">
+        
+    <meta name="author" content="Hao Dong">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/tags/matlab/">
+    <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
+    <link rel="stylesheet" href='/haodongnj/css/style.css'>
+    <link rel="alternate" type="application/rss+xml" href="https://haodongnj.github.io/haodongnj/tags/matlab/index.xml" title="Ramblings from Hao" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
+                        Ramblings from Hao
+                    </a>
+                
+                <p class="description">What you do makes who you are</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <h3 class="archive-title">
+        包含标签
+        <span class="keyword">MATLAB</span>
+        的文章
+    </h3>
+    
+
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年7月9日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/haodongnj/categories/simulation'>Simulation</a>
+            
+        </div>
+        
+        <div class="post-content">
+            1.测试环境  操作系统：Windows 10, 64bit 编译器：MinGW64  32位系统请下载对应的32位版本   MATLAB2017a  2017a之后会略有不同    2. 配置环境与流程   下载编译器MinGW64，对于64位系统而言，需要下载个安装器，可以安装相应版本的gcc编译器，我选择的是gcc-4.9.4，在测试环境中可以正常运行
+ 安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&quot;C:&quot;。    验证一下：
+  1 2  setenv(&#39;MW_MINGW64_LOC&#39;,&#39;C:\mingw64&#39;) % 先配置环境 mex -setup   输出如下图所示，这样MinGW编译器就配置好了。
+ 3. a + b 编译测试 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  setenv(&#39;MW_MINGW64_LOC&#39;,&#39;C:\mingw64&#39;) myFunctionName = &#39;SFunctionName&#39; def = legacy_code(&#39;initialize&#39;); def.……
+            <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/">阅读全文</a></p>
+        </div>
+    </article>
+    
+
+    
+
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/embedded-software/">Embedded-Software (1)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/simulation/">Simulation (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/pr/">PR</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://resourcium.org" title="Resourcium">Resourcium</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.wuqingzhe.cn/" title="Blog of Wu">Qingzhe</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.haomwei.com" title="Tufu">Tufu</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

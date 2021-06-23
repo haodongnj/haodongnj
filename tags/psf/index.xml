@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PSF on Ramblings from Hao</title>
+    <link>https://haodongnj.github.io/haodongnj/tags/psf/</link>
+    <description>Recent content in PSF on Ramblings from Hao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 03 Feb 2021 00:38:40 +0800</lastBuildDate>
+    
+	<atom:link href="https://haodongnj.github.io/haodongnj/tags/psf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Richardson-Lucy Deconvolution</title>
+      <link>https://haodongnj.github.io/haodongnj/post/rl-deconvolve/</link>
+      <pubDate>Wed, 03 Feb 2021 00:38:40 +0800</pubDate>
+      
+      <guid>https://haodongnj.github.io/haodongnj/post/rl-deconvolve/</guid>
+      <description>RL反卷积都干了些啥 RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。 损失函数是啥样的呢？
+$$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
+且有：
+ $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：
+$$ \nabla J = [1 - \frac{I}{O**PSF}] ** PSF^{T} $$
+利用迭代法，就可以使代价函数最小，如下：
+$$ O_{k+1} = O_{k} - \alpha \cdot \nabla J $$
+简化可得：
+$$ O_{k+1} = O_{k} \cdot [\frac{I}{O_{k} ** PSF} ** PSF^{T}] $$
+按照这个迭代式，一般RL反卷积算法迭代个十几次就差不多了。
+但是!
+为什么要这么干呢？代价函数是怎么来的呢？ 这和光学设备的成像的噪声性质有关系。
+数码噪点的泊松分布 由于光线具有波粒二象性，在进行数字成像时，在像素点上的光子数量在概率上呈泊松分布。  对于某个像素点而言，曝光时的光电子数量$i$满足泊松分布：
+$$ p(i) = e^{-\lambda} \cdot \frac{\lambda ^{i}}{i!</description>
+    </item>
+    
+  </channel>
+</rss>

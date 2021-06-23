@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>C Language Implementation for Proportional-Resonant Controller | Ramblings from Hao</title>
+    <meta property="og:title" content="C Language Implementation for Proportional-Resonant Controller - Ramblings from Hao">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-06-22T02:13:54&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-06-22T02:13:54&#43;08:00'>
+        
+    <meta name="Keywords" content="Blog,Control">
+    <meta name="description" content="C Language Implementation for Proportional-Resonant Controller">
+        
+    <meta name="author" content="Hao Dong">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/pr-control/">
+    <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
+    <link rel="stylesheet" href='/haodongnj/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
+                        Ramblings from Hao
+                    </a>
+                
+                <p class="description">What you do makes who you are</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">C Language Implementation for Proportional-Resonant Controller</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年6月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="1-introduction-to-proportional-resonant-controller">1. Introduction to Proportional-Resonant Controller</h2>
+<p>First, let&rsquo;s see the transfer function of PR controller and its bode diagram:</p>
+<p>$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$</p>
+<p>where the $\omega_{r}$ is the resonant frequency.</p>
+<p>
+        <img class="mx-auto" alt="Bode diagram of PR Controller" src="bode_pr.jpg" />   
+    </p>
+<p>As can be seen in the bode diagram, the gain at 50Hz (314 rad/s) is infinite, so PR controller can be used to track reference of specific frequency. However, the reference frequency is not always a constant, e.g. the frequency of electricity grid. In practice, Quasi-Proportional-Resonant(QPR) can be used to solve this problem.</p>
+<p>The transfer function of QPR and its bode diagram:</p>
+<p>$$
+G_{QPR}(s) = K_{p} +\frac{2 \omega_{i} Kr s}{s^{2} + 2\omega_{i}s + \omega_{r}^{2}}
+$$</p>
+<p>
+        <img class="mx-auto" alt="Bode diagram of QPR Controller" src="bode_qpr.jpg" />   
+    </p>
+<p>where the addition of $2 \omega _{i}$ reduces the gain at resonant frequency but increase the band width around resonant frequency.</p>
+<p>You can change the parameter $\omega_{r}$ and run the demo code below to see how it changes the shape of bode diagram.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-MATLAB" data-lang="MATLAB"><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span> <span class="p">;</span>
+
+<span class="n">Kp</span> <span class="p">=</span> <span class="mi">15</span> <span class="p">;</span>
+<span class="n">Kr</span> <span class="p">=</span> <span class="mi">2000</span> <span class="p">;</span>
+<span class="n">wr</span> <span class="p">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">pi</span> <span class="p">;</span>
+<span class="n">wi</span> <span class="p">=</span> <span class="nb">pi</span> <span class="p">;</span>
+
+<span class="n">G_PR</span> <span class="p">=</span> <span class="n">Kp</span> <span class="o">+</span> <span class="n">Kr</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span>^<span class="mi">2</span> <span class="o">+</span> <span class="n">wr</span>^<span class="mi">2</span><span class="p">)</span>
+<span class="n">figure</span>
+<span class="n">bode</span><span class="p">(</span><span class="n">G_PR</span><span class="p">)</span>
+
+<span class="n">G_QPR</span> <span class="p">=</span> <span class="n">Kp</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">wi</span> <span class="o">*</span> <span class="n">Kr</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span>^<span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">wi</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span>  <span class="n">wr</span>^<span class="mi">2</span><span class="p">)</span>
+<span class="n">figure</span>
+<span class="n">bode</span><span class="p">(</span><span class="n">G_QPR</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-implementation-in-c">2. Implementation in C</h2>
+<p>The code is in the repository <a href="https://github.com/donghao2nanjing/Controller">Controller</a>, feel free to use it for your own application.</p>
+<p>The structure of QPR controller implemented is as below:</p>
+<p>
+        <img class="mx-auto" alt="PR Implementation" src="impl_qpr.jpg" />   
+    </p>
+<p>As shown in this <a href="https://ieeexplore.ieee.org/document/5398914">paper</a>, the structure of QPR controller can be implemented using 2 integrators.</p>
+<p>The implemented structure above has 2 advantages:</p>
+<ul>
+<li>Easy to implemented, only 2 integrators used.</li>
+<li>Autonomous resonant frequency adaption: $\omega_{r}$ can be fed into the controller and real-time resonant frequency adaption is achieved.</li>
+</ul>
+<p>You can run this <a href="https://raw.githubusercontent.com/donghao2nanjing/Controller/master/PR/test/PR_TestDemo.slx">demo</a> to see the effectiveness of this structure</p>
+<ul>
+<li>$K_{p}$ is set to be 0 and $K_{r}$ to be 10</li>
+<li>$\omega_{i}$ is set to be $0.01 \omega_{r}$</li>
+</ul>
+<p>The output response is as below:</p>
+<p>
+        <img class="mx-auto" alt="Simulation Result" src="response.jpg" />   
+    </p>
+<p>As you can see in the result above, the input signal is a sine wave with an amplitude of 1 and the output with an amplitude of 10, corresponding to the parameter&ndash; $K_p$ is 0 and $K_r$ is 10.</p>
+<h2 id="3-reference">3. Reference</h2>
+<ol>
+<li><a href="https://ieeexplore.ieee.org/document/5398914">Effects of Discretization Methods on the Performance of Resonant Controllers</a></li>
+<li><a href="https://wenku.baidu.com/view/bd6ad8d85022aaea998f0fdb.html">比例谐振控制算法分析</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://haodongnj.github.io/haodongnj">Hao Dong</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://haodongnj.github.io/haodongnj/post/pr-control/">https://haodongnj.github.io/haodongnj/post/pr-control/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/haodongnj/post/descretization-method/">Discretization method(离散化方法)</a></li>
+        
+        <li><a href="/haodongnj/post/stability-in-frequency-domain/">稳定性和振荡的频域理解</a></li>
+        
+        <li><a href="/haodongnj/archives/">Archives</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/haodongnj/tags/control'>Control</a></li>
+                
+                <li><a href='/haodongnj/tags/pr'>PR</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/embedded-software/">Embedded-Software (1)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/simulation/">Simulation (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/pr/">PR</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://resourcium.org" title="Resourcium">Resourcium</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.wuqingzhe.cn/" title="Blog of Wu">Qingzhe</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.haomwei.com" title="Tufu">Tufu</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

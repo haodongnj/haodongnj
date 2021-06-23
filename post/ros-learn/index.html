@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>刚开始学习ROS的一些坑(持续更新) | Ramblings from Hao</title>
+    <meta property="og:title" content="刚开始学习ROS的一些坑(持续更新) - Ramblings from Hao">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-12-20T00:52:01&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-12-20T00:52:01&#43;08:00'>
+        
+    <meta name="Keywords" content="Blog,Control">
+    <meta name="description" content="刚开始学习ROS的一些坑(持续更新)">
+        
+    <meta name="author" content="Hao Dong">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/ros-learn/">
+    <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
+    <link rel="stylesheet" href='/haodongnj/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
+                        Ramblings from Hao
+                    </a>
+                
+                <p class="description">What you do makes who you are</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">刚开始学习ROS的一些坑(持续更新)</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月20日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="unmet-dependency">unmet dependency</h2>
+<p>本着能省一事就省一事的原则，我装了Ubuntu 20.04 LTS，可是在安装ROS noetic的时候还是出现了<em>unmet dependency</em>的问题。
+默认的&ndash;fix-missing是没有用的，看看哪些包出问题了就用下面的命令强制覆写一下就OK了。
+这些包一般会缓存在/var目录下的子目录里面，报错信息里面会有说明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo dpkg -i --force-overwrite &lt;filename&gt;
+sudo apt install --fix-missing
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="ros_readbagfilepy">ros_readbagfile.py</h2>
+<p>这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。
+在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。
+从python2转换到python3解决了这个问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python3" data-lang="python3"><span class="c1"># 改下文件头的解释器设置</span>
+<span class="c1">#!/usr/bin/python3</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">2to3 -f has_key -w ros_readbagfile.py
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="network-configuration">network configuration</h2>
+<p>在测试多个笔记本的通信时，发现master已经publish消息了，但是另外一台笔记本却没有收到。这是因为localhost对应的IP地址为127.0.0.1，只能在本机访问。设置master笔记本的ROS_IP环境变量即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">ROS_IP</span><span class="o">=</span><span class="s1">&#39;192.168.***.***&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="roswtf-what-the-fuck">roswtf: what the fuck?</h2>
+<p>在出现问题的时候，用这个命令排查一下，还是挺方便的:)</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a href="http://wiki.ros.org/ROS/Troubleshooting">ROS: Troubleshooting</a></li>
+<li><a href="http://wiki.ros.org/ROS/NetworkSetup">ROS: NetworkSetup</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://haodongnj.github.io/haodongnj">Hao Dong</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://haodongnj.github.io/haodongnj/post/ros-learn/">https://haodongnj.github.io/haodongnj/post/ros-learn/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/haodongnj/post/life-meaning/">生活的意义</a></li>
+        
+        <li><a href="/haodongnj/about/">关于我</a></li>
+        
+        <li><a href="/haodongnj/post/rpi-rt-kernel/">树莓派实时内核编译与测试</a></li>
+        
+        <li><a href="/haodongnj/post/bodeplot/">从伯德图说起</a></li>
+        
+        <li><a href="/haodongnj/post/matlab-sfunction/">Windows的MATLAB中用C语言写SFunction的一些坑</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/embedded-software/">Embedded-Software (1)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/simulation/">Simulation (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/pr/">PR</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://resourcium.org" title="Resourcium">Resourcium</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.wuqingzhe.cn/" title="Blog of Wu">Qingzhe</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.haomwei.com" title="Tufu">Tufu</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

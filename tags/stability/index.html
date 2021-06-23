@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>stability | Ramblings from Hao</title>
+    <meta property="og:title" content="stability - Ramblings from Hao">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="Blog,Control">
+    <meta name="description" content="stability">
+        
+    <meta name="author" content="Hao Dong">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/tags/stability/">
+    <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
+    <link rel="stylesheet" href='/haodongnj/css/style.css'>
+    <link rel="alternate" type="application/rss+xml" href="https://haodongnj.github.io/haodongnj/tags/stability/index.xml" title="Ramblings from Hao" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
+                        Ramblings from Hao
+                    </a>
+                
+                <p class="description">What you do makes who you are</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
+                    
+                    <a  href="https://haodongnj.github.io/haodongnj/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <h3 class="archive-title">
+        包含标签
+        <span class="keyword">stability</span>
+        的文章
+    </h3>
+    
+
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/">稳定性和振荡的频域理解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年3月31日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/haodongnj/categories/control'>Control</a>
+            
+        </div>
+        
+        <div class="post-content">
+            系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
+因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
+1 2 3 4  fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)   可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
+ 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
+ 对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
+毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
+            <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/">阅读全文</a></p>
+        </div>
+    </article>
+    
+
+    
+
+
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/embedded-software/">Embedded-Software (1)</a></li>
+    
+    <li><a href="https://haodongnj.github.io/haodongnj/categories/simulation/">Simulation (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/pr/">PR</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
+    
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://resourcium.org" title="Resourcium">Resourcium</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.wuqingzhe.cn/" title="Blog of Wu">Qingzhe</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.haomwei.com" title="Tufu">Tufu</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
