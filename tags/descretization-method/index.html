@@ -43,7 +43,7 @@
                         Ramblings from Hao
                     </a>
                 
-                <p class="description">What you do makes who you are</p>
+                <p class="description">控制、感知与编程</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -101,20 +101,7 @@ $$ s \leftarrow \frac{z-1}{Tz} $$
  2. 前向差分 前向差分的映射关系为：
 $$ s \leftarrow \frac{z-1}{T} $$
 从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。
- 3. Tustin Method(双线性变换方法：Bilinear Transform) 双线性变换方法的映射关系为：
-$$ s \leftarrow \frac{2}{T}\frac{z-1}{z+1} $$
-双线性变换方法其实是比较常用的离散化方法啦，毕竟这种方法能够保持映射前后的稳定性是一致的。因为从s平面到z平面的映射来看，该映射将s平面的左半平面映射到z平面的单位圆内。
- 4. Tustin Method with pre-warping 双线性变换方法虽然好，但是也有其本身的问题：频偏效应。s域的传递函数的频率和离散化数字传递函数的频率的对应映射关系是非线性的。这种效应可以通过带pre-warping的Tustin方法缓解。频率的对应映射关系为
-$$ w_{a} = \frac{2}{T}tan{(w_{d}\frac{T}{2})} $$
-根据这个频率映射关系，我们就可以针对特定的频率范围附近，也就是我们感兴趣的频率范围附近，将数字滤波器的幅频特性与模拟滤波器的幅频特性相匹配。
-5.零极点匹配法 s域的传递函数为：
-$$ H(s)=\frac{\prod_{k=1}^{M}(s-z_{k})}{\prod_{k=1}^{N}(s-p_{k})} $$
-那么根据零极点匹配得原则，离散化形式如下：
-$$ H(z)=\frac{\prod_{k=1}^{M}(1-e^{z_{k}T}z^{-1})}{\prod_{k=1}^{N}(1-e^{p_{k}T}z^{-1})} $$
-这种方法存在一定的假设前提，同时还有对于离散化得到的数字滤波器加入一个为0的零点来得到一个minimum delay filter这样的技巧，详情可以参见参考。
-6. 其他方法 除了上述方法之外呢，还有一些其他方法，例如：
-除了上述方法之外呢，还有一些其他方法，例如：
- 冲激响应不变法 阶跃响应不变法（ZOH法，零阶保持器法） 斜坡响应不变法（一阶保持器法） 幅频响应不变法 相频响应不变法  这些方法都有其特性或有点，在不同的场合下应该有不同的应用。笔者暂时用不到，就暂且不表了。……
+ 3.……
             <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/descretization-method/">阅读全文</a></p>
         </div>
     </article>
@@ -285,6 +272,10 @@ $$ H(z)=\frac{\prod_{k=1}^{M}(1-e^{z_{k}T}z^{-1})}{\prod_{k=1}^{N}(1-e^{p_{k}T}z
         
         <li>
             <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
         </li>
         
     </ul>

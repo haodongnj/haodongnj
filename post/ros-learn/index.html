@@ -46,7 +46,7 @@
                         Ramblings from Hao
                     </a>
                 
-                <p class="description">What you do makes who you are</p>
+                <p class="description">控制、感知与编程</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -85,49 +85,23 @@
 <p>本着能省一事就省一事的原则，我装了Ubuntu 20.04 LTS，可是在安装ROS noetic的时候还是出现了<em>unmet dependency</em>的问题。
 默认的&ndash;fix-missing是没有用的，看看哪些包出问题了就用下面的命令强制覆写一下就OK了。
 这些包一般会缓存在/var目录下的子目录里面，报错信息里面会有说明。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo dpkg -i --force-overwrite &lt;filename&gt;
+<pre><code class="language-bash">sudo dpkg -i --force-overwrite &lt;filename&gt;
 sudo apt install --fix-missing
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="ros_readbagfilepy">ros_readbagfile.py</h2>
+</code></pre>
+<h2 id="ros_readbagfilepy">ros_readbagfile.py</h2>
 <p>这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。
 在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。
 从python2转换到python3解决了这个问题。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python3" data-lang="python3"><span class="c1"># 改下文件头的解释器设置</span>
-<span class="c1">#!/usr/bin/python3</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">2to3 -f has_key -w ros_readbagfile.py
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="network-configuration">network configuration</h2>
+<pre><code class="language-python3"># 改下文件头的解释器设置
+#!/usr/bin/python3
+</code></pre>
+<pre><code class="language-bash">2to3 -f has_key -w ros_readbagfile.py
+</code></pre>
+<h2 id="network-configuration">network configuration</h2>
 <p>在测试多个笔记本的通信时，发现master已经publish消息了，但是另外一台笔记本却没有收到。这是因为localhost对应的IP地址为127.0.0.1，只能在本机访问。设置master笔记本的ROS_IP环境变量即可。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">ROS_IP</span><span class="o">=</span><span class="s1">&#39;192.168.***.***&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="roswtf-what-the-fuck">roswtf: what the fuck?</h2>
+<pre><code class="language-bash">export ROS_IP='192.168.***.***'
+</code></pre>
+<h2 id="roswtf-what-the-fuck">roswtf: what the fuck?</h2>
 <p>在出现问题的时候，用这个命令排查一下，还是挺方便的:)</p>
 <h2 id="reference">Reference</h2>
 <ol>
@@ -349,6 +323,10 @@ sudo apt install --fix-missing
         
         <li>
             <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
         </li>
         
     </ul>

@@ -46,7 +46,7 @@
                         Ramblings from Hao
                     </a>
                 
-                <p class="description">What you do makes who you are</p>
+                <p class="description">控制、感知与编程</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -115,90 +115,46 @@
 <p>验证一下：</p>
 </li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-MATLAB" data-lang="MATLAB"><span class="n">setenv</span><span class="p">(</span><span class="s">&#39;MW_MINGW64_LOC&#39;</span><span class="p">,</span><span class="s">&#39;C:\mingw64&#39;</span><span class="p">)</span> <span class="c">% 先配置环境</span>
-<span class="n">mex</span> <span class="o">-</span><span class="n">setup</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>输出如下图所示，这样MinGW编译器就配置好了。</p>
+<pre><code class="language-MATLAB">setenv('MW_MINGW64_LOC','C:\mingw64') % 先配置环境
+mex -setup
+</code></pre>
+<p>输出如下图所示，这样MinGW编译器就配置好了。</p>
 <p>
         <img class="mx-auto" alt="配置成功输出" src="config_success.jpg" />   
     </p>
 <h2 id="3-a--b-编译测试">3. a + b 编译测试</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-MATLAB" data-lang="MATLAB"><span class="n">setenv</span><span class="p">(</span><span class="s">&#39;MW_MINGW64_LOC&#39;</span><span class="p">,</span><span class="s">&#39;C:\mingw64&#39;</span><span class="p">)</span>
+<pre><code class="language-MATLAB">setenv('MW_MINGW64_LOC','C:\mingw64')
 
-<span class="n">myFunctionName</span> <span class="p">=</span> <span class="s">&#39;SFunctionName&#39;</span>
+myFunctionName = 'SFunctionName'
 
-<span class="n">def</span> <span class="p">=</span> <span class="n">legacy_code</span><span class="p">(</span><span class="s">&#39;initialize&#39;</span><span class="p">);</span>
-<span class="n">def</span><span class="p">.</span><span class="n">SFunctionName</span> <span class="p">=</span> <span class="n">myFunctionName</span> <span class="p">;</span>
-<span class="c">% 注意，输入和输出的变量的名称只能是u1,u2...和y1,y2...</span>
-<span class="n">def</span><span class="p">.</span><span class="n">OutputFcnSpec</span> <span class="p">=</span> <span class="s">&#39;double y1 = add_2(double u1, double u2)&#39;</span><span class="p">;</span>
-<span class="c">% 设置用到的头文件或者源文件</span>
-<span class="n">def</span><span class="p">.</span><span class="n">HeaderFiles</span> <span class="p">=</span> <span class="p">{</span><span class="s">&#39;add_2.h&#39;</span><span class="p">};</span>
-<span class="n">def</span><span class="p">.</span><span class="n">SourceFiles</span> <span class="p">=</span> <span class="p">{</span><span class="s">&#39;add_2.c}
-</span><span class="s">def.InitializeConditionsFcnSpec = &#39;</span><span class="n">buffer_init</span><span class="p">()</span><span class="o">&#39;</span><span class="p">;</span>
+def = legacy_code('initialize');
+def.SFunctionName = myFunctionName ;
+% 注意，输入和输出的变量的名称只能是u1,u2...和y1,y2...
+def.OutputFcnSpec = 'double y1 = add_2(double u1, double u2)';
+% 设置用到的头文件或者源文件
+def.HeaderFiles = {'add_2.h'};
+def.SourceFiles = {'add_2.c}
+def.InitializeConditionsFcnSpec = 'buffer_init()';
 
-<span class="n">legacy_code</span><span class="p">(</span><span class="s">&#39;sfcn_cmex_generate&#39;</span><span class="p">,</span> <span class="n">def</span><span class="p">);</span>
-<span class="n">legacy_code</span><span class="p">(</span><span class="s">&#39;compile&#39;</span><span class="p">,</span> <span class="n">def</span><span class="p">)</span> <span class="p">;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>以上代码可以在MATLAB中快捷编译，并且生成Simulink可用的文件&quot;add_2.mex64&rdquo;，在Simulink中加入S-Function模块，并且将名字设置为&quot;add_2&quot;即可。</p>
+legacy_code('sfcn_cmex_generate', def);
+legacy_code('compile', def) ;
+</code></pre>
+<p>以上代码可以在MATLAB中快捷编译，并且生成Simulink可用的文件&quot;add_2.mex64&rdquo;，在Simulink中加入S-Function模块，并且将名字设置为&quot;add_2&quot;即可。</p>
 <p>add_2.c就可以直接写一个两个数相加的程序验证一下就好了; add_2.h写个函数声明也就可以了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-C" data-lang="C"><span class="c1">// add_2.c
-</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;add_2.h&#34;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">double</span> <span class="nf">add_2</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">b</span><span class="p">){</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">;</span>
-<span class="p">}</span>
+<pre><code class="language-C">// add_2.c
+#include &quot;add_2.h&quot;
 
-<span class="c1">// add_2.h
-</span><span class="c1"></span><span class="cp">#ifndef ADD_2_H
-</span><span class="cp">#define ADD_2_H
-</span><span class="cp"></span><span class="kt">double</span> <span class="nf">add_2</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">b</span><span class="p">);</span>
-<span class="cp">#endif
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id="4-参考">4. 参考</h2>
+double add_2(double a, double b){
+    return a + b ;
+}
+
+// add_2.h
+#ifndef ADD_2_H
+#define ADD_2_H
+double add_2(double a, double b);
+#endif
+</code></pre>
+<h2 id="4-参考">4. 参考</h2>
 <ol>
 <li><a href="https://www.mathworks.com/help/matlab/matlab_external/compiling-c-mex-files-with-mingw.html">Mathworks关于空格的说明</a></li>
 <li><a href="https://www.mathworks.com/matlabcentral/answers/313298-i-already-have-mingw-on-my-computer-how-do-i-configure-it-to-work-with-matlab">MATLAB 2017后版本注意事项</a></li>
@@ -423,6 +379,10 @@
         
         <li>
             <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
         </li>
         
     </ul>

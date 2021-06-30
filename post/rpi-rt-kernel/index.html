@@ -46,7 +46,7 @@
                         Ramblings from Hao
                     </a>
                 
-                <p class="description">What you do makes who you are</p>
+                <p class="description">控制、感知与编程</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -101,122 +101,49 @@
 </ol>
 <h2 id="2-编译">2. 编译</h2>
 <p>1.获取代码和工具：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># From LeMaRiva</span>
+<pre><code class="language-bash"># From LeMaRiva
 mkdir rpi-rt
-<span class="nb">cd</span> rpi-rt
-mkdir rt-kernel <span class="c1"># 用于存放编译产生的文件</span>
-<span class="nb">cd</span> rt-kernel
+cd rpi-rt
+mkdir rt-kernel # 用于存放编译产生的文件
+cd rt-kernel
 mkdir boot
-<span class="nb">cd</span> ..
-<span class="c1"># 获取树梅派源码</span>
+cd ..
+# 获取树梅派源码
 git clone https://github.com/raspberrypi/linux.git
-<span class="c1"># 获取编译工具</span>
+# 获取编译工具
 git clone https://github.com/raspberrypi/tools.git
-<span class="nb">cd</span> linux
-git checkout rpi-4.14.y-rt <span class="c1"># 截至2019年6月16日最新的rt分支</span>
+cd linux
+git checkout rpi-4.14.y-rt # 截至2019年6月16日最新的rt分支
 ​
-<span class="c1"># 配置变量</span>
-<span class="nb">export</span> <span class="nv">ARCH</span><span class="o">=</span>arm
-<span class="nb">export</span> <span class="nv">CROSS_COMPILE</span><span class="o">=</span>~/rpi-rt/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-
-<span class="nb">export</span> <span class="nv">INSTALL_MOD_PATH</span><span class="o">=</span>~/rpi-rt/rt-kernel
-<span class="nb">export</span> <span class="nv">INSTALL_DTBS_PATH</span><span class="o">=</span>~/rpi-rt/rt-kernel
+# 配置变量
+export ARCH=arm
+export CROSS_COMPILE=~/rpi-rt/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-
+export INSTALL_MOD_PATH=~/rpi-rt/rt-kernel
+export INSTALL_DTBS_PATH=~/rpi-rt/rt-kernel
 
-<span class="c1"># 对RPi 2/3 B以及RPi Compute Module的配置(Compute Module本人测试过，使用该配置)</span>
-<span class="nb">export</span> <span class="nv">KERNEL</span><span class="o">=</span>kernel7
+# 对RPi 2/3 B以及RPi Compute Module的配置(Compute Module本人测试过，使用该配置)
+export KERNEL=kernel7
 make bcm2709-defconfig
-<span class="c1"># 对RPi A(+), B(+), Zero</span>
-<span class="nb">export</span> <span class="nv">KERNEL</span><span class="o">=</span>kernel
+# 对RPi A(+), B(+), Zero
+export KERNEL=kernel
 make bcmrpi_defconfig
 
 vim .config
-<span class="c1"># 确认一下字段的配置</span>
-<span class="nv">CONFIG_HIGH_RES_TIMERS</span><span class="o">=</span>y <span class="c1"># 默认已配置为y</span>
-<span class="nv">CONFIG_PREEMPT_RT_FULL</span><span class="o">=</span>y <span class="c1"># 默认已配置为y</span>
-<span class="nv">CONFIG_HZ_1000</span><span class="o">=</span>y <span class="c1"># 需要手动更改</span>
-<span class="nv">CONFIG_HZ</span><span class="o">=</span><span class="m">1000</span> <span class="c1"># 需要手动更改</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>2.编译内核</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">make -j8 zImage
+# 确认一下字段的配置
+CONFIG_HIGH_RES_TIMERS=y # 默认已配置为y
+CONFIG_PREEMPT_RT_FULL=y # 默认已配置为y
+CONFIG_HZ_1000=y # 需要手动更改
+CONFIG_HZ=1000 # 需要手动更改
+</code></pre>
+<p>2.编译内核</p>
+<pre><code class="language-bash">make -j8 zImage
 make -j8 modules
 make -j8 dtbs
 make -j8 modules_install
 make -j8 dtbs_install
-</code></pre></td></tr></table>
-</div>
-</div><p>编译完成后，rt-kernel文件夹中结构为：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">.
+</code></pre>
+<p>编译完成后，rt-kernel文件夹中结构为：</p>
+<pre><code class="language-bash">.
 ├── boot
 ├── lib
 ├── overlays
@@ -237,100 +164,47 @@ make -j8 dtbs_install
 ├── bcm2835-rpi-zero-w.dtb
 ├── bcm2836-rpi-2-b.dtb
 └── bcm2837-rpi-3-b.dtb
-</code></pre></td></tr></table>
-</div>
-</div><p>注意：此处可能产生警告，有关编译时间对应关系的，可以忽略。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">./scripts/mkknlimg ./arch/arm/boot/zImage <span class="nv">$INSTALL_MOD_PATH</span>/boot/<span class="nv">$KERNEL</span>.img
-<span class="nb">cd</span> <span class="nv">$INSTALL_MOD_PATH</span>
+</code></pre>
+<p>注意：此处可能产生警告，有关编译时间对应关系的，可以忽略。</p>
+<pre><code class="language-bash">./scripts/mkknlimg ./arch/arm/boot/zImage $INSTALL_MOD_PATH/boot/$KERNEL.img
+cd $INSTALL_MOD_PATH
 tar czf ../rt-kernel.tgz *
 scp rt-kernel.tgz pi@&lt;IPAddress&gt;:/tmp
-</code></pre></td></tr></table>
-</div>
-</div><p>3.替换内核 进入树梅派终端：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /tmp
+</code></pre>
+<p>3.替换内核 进入树梅派终端：</p>
+<pre><code class="language-bash">cd /tmp
 tar xzf rt-kernel.tgz
-<span class="nb">cd</span> boot
+cd boot
 sudo cp -rd * /boot/
-<span class="nb">cd</span> ../lib
+cd ../lib
 sudo cp -rd * /lib/
 ~$ sudo nano /boot/config.txt
-<span class="c1">## 树梅派 3B 或者 Compute Module</span>
-<span class="nv">kernel</span><span class="o">=</span>vmlinuz-4.14.91-rt49-v7+
-<span class="c1"># 树梅派A(+), B(+), Zero</span>
-<span class="nv">kernel</span><span class="o">=</span>vmlinuz-4.14.91-rt49+
+## 树梅派 3B 或者 Compute Module
+kernel=vmlinuz-4.14.91-rt49-v7+
+# 树梅派A(+), B(+), Zero
+kernel=vmlinuz-4.14.91-rt49+
 
 sudo reboot
-</code></pre></td></tr></table>
-</div>
-</div><p>如何查看编译内核的版本呢？进入rpi-rt/rt-kernel/lib/modules文件夹下，即可通过文件夹名称看到所编译内核的具体版本号。 <a href="https://lemariva.com/blog/2018/02/raspberry-pi-rt-preempt-tutorial-for-kernel-4-14-y">LeMaRiva博客</a>中提到了需要在cmdline.txt中进行额外的设置。不过我在3B和Compute Module中都未添加那些额外的配置，测试未发现问题，可能是因为在最新的实时内核中已经修复了bug。重启后查看内核版本号即可确认内核替换成功：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">uname -r
+</code></pre>
+<p>如何查看编译内核的版本呢？进入rpi-rt/rt-kernel/lib/modules文件夹下，即可通过文件夹名称看到所编译内核的具体版本号。 <a href="https://lemariva.com/blog/2018/02/raspberry-pi-rt-preempt-tutorial-for-kernel-4-14-y">LeMaRiva博客</a>中提到了需要在cmdline.txt中进行额外的设置。不过我在3B和Compute Module中都未添加那些额外的配置，测试未发现问题，可能是因为在最新的实时内核中已经修复了bug。重启后查看内核版本号即可确认内核替换成功：</p>
+<pre><code class="language-bash">uname -r
 4.14.91-rt49-v7+
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="3-验证与测试">3. 验证与测试</h2>
+</code></pre>
+<h2 id="3-验证与测试">3. 验证与测试</h2>
 <p>可以采用rt-tests工具中的cyclictest对于内核的进程响应延时进行测试。参考Tiejun Chen的分享的脚本，可以自动测试并调用gnuplot生成测试结果图像。</p>
 <p>下载编译rt-tests：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install build-essential <span class="c1"># libnuma-dev在raspbian stretch中找不到，也不需要</span>
+<pre><code class="language-bash">sudo apt-get install build-essential # libnuma-dev在raspbian stretch中找不到，也不需要
 git clone git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
-<span class="nb">cd</span> rt-tests
+cd rt-tests
 git checkout stable/v1.0
 make all
 sudo make install
-</code></pre></td></tr></table>
-</div>
-</div><p>自动化测试脚本：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://www.osadl.org/uploads/media/mklatencyplot.bash
-sudo apt install gnuplot <span class="c1"># 该脚本使用gnuplot</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>为了节约测试验证的时间，我把该脚本中的次数由1e8改成了1e7。这可能导致样本不够，但是也足够表现实时内核的性能。 实测在默认内核下，最大延时为422us；而在实时内核下，最大延时为118us。</p>
+</code></pre>
+<p>自动化测试脚本：</p>
+<pre><code class="language-bash">wget https://www.osadl.org/uploads/media/mklatencyplot.bash
+sudo apt install gnuplot # 该脚本使用gnuplot
+</code></pre>
+<p>为了节约测试验证的时间，我把该脚本中的次数由1e8改成了1e7。这可能导致样本不够，但是也足够表现实时内核的性能。 实测在默认内核下，最大延时为422us；而在实时内核下，最大延时为118us。</p>
 <p>
         <img class="mx-auto" alt="Latency of Raspbian" src="delay_raspbian.jpg" />   
     
@@ -563,6 +437,10 @@ sudo apt install gnuplot <span class="c1"># 该脚本使用gnuplot</span>
         
         <li>
             <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
         </li>
         
     </ul>

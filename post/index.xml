@@ -18,10 +18,7 @@
       
       <guid>https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/</guid>
       <description>配置 趁着618攒了一台主机，犹豫了很久还是决定上车AMD，配置如下：
- CPU: AMD Ryzen-9 5900x 主板：TUF Gaming X570-Plus WIFI 硬盘：  1TB SSD KC2500 4TB HDD 西部数据蓝盘   Fury 32GB DDR4 3600MHz 美商海盗船AIR540中塔机箱 美商海盗船HX1200，1200W电源 GTX 750Ti显卡（等矿难）  装机的过程略去不表。记录一些配置工作：
-  安装了Windows 10和Ubuntu 20.04双系统，但是Ubuntu下可识别蓝牙但是无法识别WIFI，需要关闭Windows的快速启动功能，这样Ubuntu就可以愉快地连接WIFI了
-  为了方便使用vim，Ubuntu下把CapsLock交换为Ctrl：采用xcape即可
-  1 2 3 4 5 6 7  sudo apt-get install xcape # make CapsLock behave like Ctrl: setxkbmap -option ctrl:nocaps # make short-pressed Ctrl behave like Escape: xcape -e &amp;#39;Control_L=Escape&amp;#39;   配置grub记住上次的启动项目  1 2 3 4 5 6 7 8  sudo vim /etc/default/grub # put the following lines GRUB_DEFAULT=saved GRUB_SAVEDEFAULT=true # then run sudo update-grub   双系统时间差问题  使用下来AMD还是很香的，就是显卡不太给力，不过基本的功能算是有了。试着以12线程编译一些项目，速度还是很快的。</description>
+ CPU: AMD Ryzen-9 5900x 主板：TUF Gaming X570-Plus WIFI 硬盘：  1TB SSD KC2500 4TB HDD 西部数据蓝盘   Fury 32GB DDR4 3600MHz 美商海盗船AIR540中塔机箱 美商海盗船HX1200，1200W电源 GTX 750Ti显卡（等矿难）  装机的过程略去不表。记录一些配置工作：</description>
     </item>
     
     <item>
@@ -33,17 +30,7 @@
       <description>RL反卷积都干了些啥 RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。 损失函数是啥样的呢？
 $$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
 且有：
- $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：
-$$ \nabla J = [1 - \frac{I}{O**PSF}] ** PSF^{T} $$
-利用迭代法，就可以使代价函数最小，如下：
-$$ O_{k+1} = O_{k} - \alpha \cdot \nabla J $$
-简化可得：
-$$ O_{k+1} = O_{k} \cdot [\frac{I}{O_{k} ** PSF} ** PSF^{T}] $$
-按照这个迭代式，一般RL反卷积算法迭代个十几次就差不多了。
-但是!
-为什么要这么干呢？代价函数是怎么来的呢？ 这和光学设备的成像的噪声性质有关系。
-数码噪点的泊松分布 由于光线具有波粒二象性，在进行数字成像时，在像素点上的光子数量在概率上呈泊松分布。  对于某个像素点而言，曝光时的光电子数量$i$满足泊松分布：
-$$ p(i) = e^{-\lambda} \cdot \frac{\lambda ^{i}}{i!</description>
+ $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：</description>
     </item>
     
     <item>
@@ -53,10 +40,8 @@ $$ p(i) = e^{-\lambda} \cdot \frac{\lambda ^{i}}{i!</description>
       
       <guid>https://haodongnj.github.io/haodongnj/post/ros-learn/</guid>
       <description>unmet dependency 本着能省一事就省一事的原则，我装了Ubuntu 20.04 LTS，可是在安装ROS noetic的时候还是出现了unmet dependency的问题。 默认的&amp;ndash;fix-missing是没有用的，看看哪些包出问题了就用下面的命令强制覆写一下就OK了。 这些包一般会缓存在/var目录下的子目录里面，报错信息里面会有说明。
-1 2  sudo dpkg -i --force-overwrite &amp;lt;filename&amp;gt; sudo apt install --fix-missing   ros_readbagfile.py 这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。 在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。 从python2转换到python3解决了这个问题。
-1 2  # 改下文件头的解释器设置 #!/usr/bin/python3   1  2to3 -f has_key -w ros_readbagfile.py   network configuration 在测试多个笔记本的通信时，发现master已经publish消息了，但是另外一台笔记本却没有收到。这是因为localhost对应的IP地址为127.0.0.1，只能在本机访问。设置master笔记本的ROS_IP环境变量即可。
-1  export ROS_IP=&amp;#39;192.168.***.***&amp;#39;   roswtf: what the fuck? 在出现问题的时候，用这个命令排查一下，还是挺方便的:)
-Reference  ROS: Troubleshooting ROS: NetworkSetup  </description>
+sudo dpkg -i --force-overwrite &amp;lt;filename&amp;gt; sudo apt install --fix-missing  ros_readbagfile.py 这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。 在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。 从python2转换到python3解决了这个问题。
+# 改下文件头的解释器设置 #!</description>
     </item>
     
     <item>
@@ -83,7 +68,7 @@ Reference  ROS: Troubleshooting ROS: NetworkSetup  </description>
       <description>1. 简介 本文档主要根据LeMaRiva的博客内容整理并基于最新的rt分支代码复现，简述以下2个方面：
  如何为树莓派编译实时内核 测试实时内核的进程调度延时性能  实验所需硬件：
  树莓派3B 8G TF卡  2. 编译 1.获取代码和工具：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33  # From LeMaRiva mkdir rpi-rt cd rpi-rt mkdir rt-kernel # 用于存放编译产生的文件 cd rt-kernel mkdir boot cd .. # 获取树梅派源码 git clone https://github.</description>
+# From LeMaRiva mkdir rpi-rt cd rpi-rt mkdir rt-kernel # 用于存放编译产生的文件 cd rt-kernel mkdir boot cd .</description>
     </item>
     
     <item>
@@ -98,22 +83,7 @@ $$G_{p} = K_{p}$$
 当 $K_{p} = 1$ 时，其传递函数如下图所示:
  那么这张图代表什么呢？代表着任意频率的正弦信号通过比例环节之后输出的信号的幅值依然不变——增益为0dB；同时输出信号和输入信号是同相位的，没有相位延迟。
 那么如果我们考虑常见的一阶惯性环节呢：
-$$ G_{rc} = \frac{1}{T_{s}s + 1} $$
-令$T_{s}=0.1$时，一节惯性环节的伯德图是什么样子的呢？
- 可见，一阶惯性环节在低频处的增益近似为0dB，而随着频率的增加，增益逐渐下降，而相位也随着频率的增加而滞后，相位滞后的极限为90°。其实一阶惯性环节这样的传递特性对应于电阻电容串联的电路，系统输入为施加在串联阻容上的电压；系统输出为电容两端的电压。如果输入电压为直流电压，那么电容的稳态电压就是直流电压；而如果施加低频正弦电压，那么输出的信号的衰减和相位滞后就会很小；而如果施加高频正弦信号的话，那么输出信号的幅度相对于输入信号就会产生衰减，相位滞后也会随之增大。
-那么衰减多少呢？滞后多少呢？对于频率为$\omega$的正弦信号，其增益和相位滞后如下式所示。
-$$ Amp = | \frac{1}{T_{s}j\omega + 1} | $$
-$$ Phase = angle(\frac{1}{T_{s}j\omega + 1}) $$
-开环伯德图——控制系统稳定分析 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint 或者 Reference）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
- 因为线性定常系统的性质——叠加性+齐次性——不同频率的输入信号的响应也可以叠加。所以很多时候为什么我们看伯德图呢？因为伯德图反映了系统输入什么样的正弦波之后，会出来什么正弦波呀。而输入信号一般都是可以分解为不同频率和相位的正弦波的叠加啊（想想傅里叶变换？）。
-结合上图，对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益大于等于1，那么系统就自然不会稳定。然而在实际系统中，由于系统功率（能量）或者非线性环节的限制、噪声的影响等等，系统的状态可能表现为自激振荡。
-而这就是对数稳定判据的一种理解方式了，其实对数稳定判据和奈奎斯特稳定判据殊途同归。
-水床效应(waterbed effect) 水床效应实际上就是考虑输出扰动的情况下，系统对于特定频率扰动抑制的局限——如果某种频率范围的扰动被抑制了，那么必然有其他频率范围的扰动被增大了。
-为什么呢？伯德敏感度积分如下所示:
-$$ \int_{0}^{\infty}{ln|S(j\omega)|d\omega}=\int_{0}^{\infty}{ln|\frac{1}{1+L(j\omega)}|}=\pi\Sigma Re(p_{k}) - \frac{\pi}{2}lim_{s \to \infty}sL(s) $$
-其中，$L(s)$ 是系统的环路增益，p_{k}是环路增益L(s)的不稳定极点。
-如果
- $L(s)$ 没有不稳定的极点(确保上式被减数为0) $L(s)$ 极点比零点多至少2个(确保上式被减数为0)  那么，就有：</description>
+$$ G_{rc} = \frac{1}{T_{s}s + 1} $$</description>
     </item>
     
     <item>
@@ -123,9 +93,7 @@ $$ \int_{0}^{\infty}{ln|S(j\omega)|d\omega}=\int_{0}^{\infty}{ln|\frac{1}{1+L(j\
       
       <guid>https://haodongnj.github.io/haodongnj/post/matlab-sfunction/</guid>
       <description>1.测试环境  操作系统：Windows 10, 64bit 编译器：MinGW64  32位系统请下载对应的32位版本   MATLAB2017a  2017a之后会略有不同    2. 配置环境与流程   下载编译器MinGW64，对于64位系统而言，需要下载个安装器，可以安装相应版本的gcc编译器，我选择的是gcc-4.9.4，在测试环境中可以正常运行
- 安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&amp;quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&amp;quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&amp;quot;C:&amp;quot;。    验证一下：
-  1 2  setenv(&amp;#39;MW_MINGW64_LOC&amp;#39;,&amp;#39;C:\mingw64&amp;#39;) % 先配置环境 mex -setup   输出如下图所示，这样MinGW编译器就配置好了。
- 3. a + b 编译测试 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  setenv(&amp;#39;MW_MINGW64_LOC&amp;#39;,&amp;#39;C:\mingw64&amp;#39;) myFunctionName = &amp;#39;SFunctionName&amp;#39; def = legacy_code(&amp;#39;initialize&amp;#39;); def.</description>
+ 安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&amp;quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&amp;quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&amp;quot;C:&amp;quot;。    验证一下：</description>
     </item>
     
     <item>
@@ -135,9 +103,7 @@ $$ \int_{0}^{\infty}{ln|S(j\omega)|d\omega}=\int_{0}^{\infty}{ln|\frac{1}{1+L(j\
       
       <guid>https://haodongnj.github.io/haodongnj/post/pr-control/</guid>
       <description>1. Introduction to Proportional-Resonant Controller First, let&amp;rsquo;s see the transfer function of PR controller and its bode diagram:
-$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$
-where the $\omega_{r}$ is the resonant frequency.
- As can be seen in the bode diagram, the gain at 50Hz (314 rad/s) is infinite, so PR controller can be used to track reference of specific frequency. However, the reference frequency is not always a constant, e.</description>
+$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$</description>
     </item>
     
     <item>
@@ -154,20 +120,7 @@ $$ s \leftarrow \frac{z-1}{Tz} $$
  2. 前向差分 前向差分的映射关系为：
 $$ s \leftarrow \frac{z-1}{T} $$
 从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。
- 3. Tustin Method(双线性变换方法：Bilinear Transform) 双线性变换方法的映射关系为：
-$$ s \leftarrow \frac{2}{T}\frac{z-1}{z+1} $$
-双线性变换方法其实是比较常用的离散化方法啦，毕竟这种方法能够保持映射前后的稳定性是一致的。因为从s平面到z平面的映射来看，该映射将s平面的左半平面映射到z平面的单位圆内。
- 4. Tustin Method with pre-warping 双线性变换方法虽然好，但是也有其本身的问题：频偏效应。s域的传递函数的频率和离散化数字传递函数的频率的对应映射关系是非线性的。这种效应可以通过带pre-warping的Tustin方法缓解。频率的对应映射关系为
-$$ w_{a} = \frac{2}{T}tan{(w_{d}\frac{T}{2})} $$
-根据这个频率映射关系，我们就可以针对特定的频率范围附近，也就是我们感兴趣的频率范围附近，将数字滤波器的幅频特性与模拟滤波器的幅频特性相匹配。
-5.零极点匹配法 s域的传递函数为：
-$$ H(s)=\frac{\prod_{k=1}^{M}(s-z_{k})}{\prod_{k=1}^{N}(s-p_{k})} $$
-那么根据零极点匹配得原则，离散化形式如下：
-$$ H(z)=\frac{\prod_{k=1}^{M}(1-e^{z_{k}T}z^{-1})}{\prod_{k=1}^{N}(1-e^{p_{k}T}z^{-1})} $$
-这种方法存在一定的假设前提，同时还有对于离散化得到的数字滤波器加入一个为0的零点来得到一个minimum delay filter这样的技巧，详情可以参见参考。
-6. 其他方法 除了上述方法之外呢，还有一些其他方法，例如：
-除了上述方法之外呢，还有一些其他方法，例如：
- 冲激响应不变法 阶跃响应不变法（ZOH法，零阶保持器法） 斜坡响应不变法（一阶保持器法） 幅频响应不变法 相频响应不变法  这些方法都有其特性或有点，在不同的场合下应该有不同的应用。笔者暂时用不到，就暂且不表了。</description>
+ 3.</description>
     </item>
     
     <item>
@@ -178,7 +131,7 @@ $$ H(z)=\frac{\prod_{k=1}^{M}(1-e^{z_{k}T}z^{-1})}{\prod_{k=1}^{N}(1-e^{p_{k}T}z
       <guid>https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/</guid>
       <description>系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
 因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
-1 2 3 4  fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)   可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
+fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
  考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
  对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
 毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)</description>

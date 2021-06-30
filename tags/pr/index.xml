@@ -18,9 +18,7 @@
       
       <guid>https://haodongnj.github.io/haodongnj/post/pr-control/</guid>
       <description>1. Introduction to Proportional-Resonant Controller First, let&amp;rsquo;s see the transfer function of PR controller and its bode diagram:
-$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$
-where the $\omega_{r}$ is the resonant frequency.
- As can be seen in the bode diagram, the gain at 50Hz (314 rad/s) is infinite, so PR controller can be used to track reference of specific frequency. However, the reference frequency is not always a constant, e.</description>
+$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$</description>
     </item>
     
   </channel>
