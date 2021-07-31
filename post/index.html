@@ -71,6 +71,24 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/" title="C&#43;&#43;学习小结">C&#43;&#43;学习小结</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年7月19日
+        </date>
+        
+        <div class="post-content">
+            移动语义与右值引用  What is move semantics C++ Rvalue References Explained  参考资源  C++那些事  参考书籍  C++ Primer Modern C++ Tutorial: C++ 11/14/17/20 On the Fly  ……
+        </div>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
             </h1>
         </header>
@@ -296,38 +314,28 @@ $$ s \leftarrow \frac{z-1}{T} $$
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2017年3月31日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
-因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
-fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
- 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
- 对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
-毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
-        </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://haodongnj.github.io/haodongnj/post/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://haodongnj.github.io/haodongnj/post/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://haodongnj.github.io/haodongnj/post/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -379,6 +387,10 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 <ul class="widget-list">
     
     <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/" title="C&#43;&#43;学习小结">C&#43;&#43;学习小结</a>
+    </li>
+    
+    <li>
         <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
     </li>
     
@@ -412,10 +424,6 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
-    </li>
-    
-    <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
     </li>
     
 </ul>
@@ -494,6 +502,10 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
         
         <li>
             <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://yluo.name/" title="ROBOTer Yang.LUO">ROBOTer Yang.LUO</a>
         </li>
         
     </ul>

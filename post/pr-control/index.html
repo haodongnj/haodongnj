@@ -93,7 +93,7 @@
 <p>$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$</p>
 <p>where the $\omega_{r}$ is the resonant frequency.</p>
 <p>
-        <img class="mx-auto" alt="Bode diagram of PR Controller" src="bode_pr.jpg" />   
+        <img class="mx-auto" alt="Bode diagram of PR Controller" src="https://raw.githubusercontent.com/haodongnj/Controller/master/doc/img/PR.png" />   
     </p>
 <p>As can be seen in the bode diagram, the gain at 50Hz (314 rad/s) is infinite, so PR controller can be used to track reference of specific frequency. However, the reference frequency is not always a constant, e.g. the frequency of electricity grid. In practice, Quasi-Proportional-Resonant(QPR) can be used to solve this problem.</p>
 <p>The transfer function of QPR and its bode diagram:</p>
@@ -101,7 +101,7 @@
 G_{QPR}(s) = K_{p} +\frac{2 \omega_{i} Kr s}{s^{2} + 2\omega_{i}s + \omega_{r}^{2}}
 $$</p>
 <p>
-        <img class="mx-auto" alt="Bode diagram of QPR Controller" src="bode_qpr.jpg" />   
+        <img class="mx-auto" alt="Bode diagram of QPR Controller" src="https://raw.githubusercontent.com/haodongnj/Controller/master/doc/img/QPR.png" />   
     </p>
 <p>where the addition of $2 \omega _{i}$ reduces the gain at resonant frequency but increase the band width around resonant frequency.</p>
 <p>You can change the parameter $\omega_{r}$ and run the demo code below to see how it changes the shape of bode diagram.</p>
@@ -132,14 +132,14 @@ bode(G_QPR)
 <li>Easy to implemented, only 2 integrators used.</li>
 <li>Autonomous resonant frequency adaption: $\omega_{r}$ can be fed into the controller and real-time resonant frequency adaption is achieved.</li>
 </ul>
-<p>You can run this <a href="https://raw.githubusercontent.com/donghao2nanjing/Controller/master/PR/test/PR_TestDemo.slx">demo</a> to see the effectiveness of this structure</p>
+<p>You can run this <a href="https://github.com/haodongnj/Controller/blob/master/examples/PR/PR_TestDemo.slx">demo</a> to see the effectiveness of this structure</p>
 <ul>
 <li>$K_{p}$ is set to be 0 and $K_{r}$ to be 10</li>
 <li>$\omega_{i}$ is set to be $0.01 \omega_{r}$</li>
 </ul>
 <p>The output response is as below:</p>
 <p>
-        <img class="mx-auto" alt="Simulation Result" src="response.jpg" />   
+        <img class="mx-auto" alt="Simulation Result" src="https://raw.githubusercontent.com/haodongnj/Controller/master/doc/img/PR_TestDemo_Results.png" />   
     </p>
 <p>As you can see in the result above, the input signal is a sine wave with an amplitude of 1 and the output with an amplitude of 10, corresponding to the parameter&ndash; $K_p$ is 0 and $K_r$ is 10.</p>
 <h2 id="3-reference">3. Reference</h2>
@@ -253,6 +253,10 @@ bode(G_QPR)
 <ul class="widget-list">
     
     <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/" title="C&#43;&#43;学习小结">C&#43;&#43;学习小结</a>
+    </li>
+    
+    <li>
         <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
     </li>
     
@@ -286,10 +290,6 @@ bode(G_QPR)
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
-    </li>
-    
-    <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
     </li>
     
 </ul>
@@ -368,6 +368,10 @@ bode(G_QPR)
         
         <li>
             <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://yluo.name/" title="ROBOTer Yang.LUO">ROBOTer Yang.LUO</a>
         </li>
         
     </ul>
