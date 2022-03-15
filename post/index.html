@@ -43,7 +43,7 @@
                         Ramblings from Hao
                     </a>
                 
-                <p class="description">控制、感知与编程</p>
+                <p class="description">控制与感知</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -71,17 +71,20 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/" title="C&#43;&#43;学习小结">C&#43;&#43;学习小结</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结">Kalman Filter小结</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2021年7月19日
+            2022年3月7日
         </date>
         
         <div class="post-content">
-            移动语义与右值引用  What is move semantics C++ Rvalue References Explained  参考资源  C++那些事  参考书籍  C++ Primer Modern C++ Tutorial: C++ 11/14/17/20 On the Fly  ……
+            卡尔曼滤波小结 最近复习了一下卡尔曼滤波，并在Coursera上完成了课程与练习1，做些简单的笔记备忘。
+1. 线性卡尔曼滤波 简单来说，对于一个线性系统的状态，可以通过模型计算获取到一个基于模型的预测状态，再通过实际测量的值来纠正系统的状态。
+通过模型来更新状态   系统的控制方程为： $$ \check{x}_k = F_{k-1} \hat{x}_{k-1} + G_{k-1}u_{k-1} $$
+  更新状态协方差矩阵： $$ \check{P}_{k}= F_{k-1} \hat{P}_{k-1} F_{k-1}^{T} + L_{k-1} Q_{k-1} L_{k-1}^{T} $$……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/kf/">阅读全文</a></p>
     </article>
     
     
@@ -142,30 +145,6 @@ sudo dpkg -i --force-overwrite &lt;filename&gt; sudo apt install --fix-missing  
 # 改下文件头的解释器设置 #!……
         </div>
         <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/ros-learn/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月10日
-        </date>
-        
-        <div class="post-content">
-            生活意义 我本来是不觉得生活本身有什么意义。看完Gorden Mathews的前两集讲座之后，也依然觉得生活本身并没有什么意义。不过确实认同工作最终是不适合成为生活的意义的。
-如果大多数人追寻生活的意义，那么社会就会瓦解。现实是大多数往往都会自动适应社会的惯例，自主地或随波逐流地将自己代入社会分工中去，并实行自我欺骗赋予生活以意义。
-从工作中获取地意义往往在于两点：
- 可衡量的进步：职称、薪资、销售额等等 创造  创造性的工作总是稀缺的，工作内容中的创造性部分也是稀缺的。而可衡量的进步往往更加实在、具体。
- 很多名言、书籍都会告诉人们应该如何生活，追寻怎样的人生，泛滥的引用充斥在各种角落。我只想引用一句散落在偏僻角落的话来作结：
- 当我还是一个相当早熟的少年的时候，我就已经深切地意识到，大多数人毫无休止地追逐的那些希望和努力都是毫无价值的。而且我不久就发现了这种追逐的残酷，这在当年较之今天是更加精心地用伪善和漂亮的字句掩饰着的。
- ……
-        </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/life-meaning/">阅读全文</a></p>
     </article>
     
     
@@ -314,28 +293,38 @@ $$ s \leftarrow \frac{z-1}{T} $$
     
     
     
-
-
-
-<ol class="page-navigator">
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年3月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
+因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
+fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
+ 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
+ 对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
+毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
+        </div>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/">阅读全文</a></p>
+    </article>
+    
+    
     
 
-    
-    <li  class="current">
-        <a href="https://haodongnj.github.io/haodongnj/post/">1</a>
-    </li>
-    
-    <li >
-        <a href="https://haodongnj.github.io/haodongnj/post/page/2/">2</a>
-    </li>
-    
 
-    
-    <li class="next">
-        <a href="https://haodongnj.github.io/haodongnj/post/page/2/">下一页</a>
-    </li>
-    
-</ol>
 
 
 
@@ -343,7 +332,7 @@ $$ s \leftarrow \frac{z-1}{T} $$
 
                     <footer id="footer">
     <div>
-        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        &copy; 2022 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
         
     </div>
     <br />
@@ -387,7 +376,7 @@ $$ s \leftarrow \frac{z-1}{T} $$
 <ul class="widget-list">
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/" title="C&#43;&#43;学习小结">C&#43;&#43;学习小结</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结">Kalman Filter小结</a>
     </li>
     
     <li>
@@ -400,10 +389,6 @@ $$ s \leftarrow \frac{z-1}{T} $$
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
-    </li>
-    
-    <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
     </li>
     
     <li>
@@ -424,6 +409,10 @@ $$ s \leftarrow \frac{z-1}{T} $$
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
     </li>
     
 </ul>
@@ -494,10 +483,6 @@ $$ s \leftarrow \frac{z-1}{T} $$
         
         <li>
             <a target="_blank" href="https://www.haomwei.com" title="Tufu">Tufu</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
         </li>
         
         <li>

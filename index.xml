@@ -12,12 +12,15 @@
     
     
     <item>
-      <title>C&#43;&#43;学习小结</title>
-      <link>https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/</link>
-      <pubDate>Mon, 19 Jul 2021 23:51:13 +0800</pubDate>
+      <title>Kalman Filter小结</title>
+      <link>https://haodongnj.github.io/haodongnj/post/kf/</link>
+      <pubDate>Mon, 07 Mar 2022 22:03:22 +0800</pubDate>
       
-      <guid>https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/</guid>
-      <description>移动语义与右值引用  What is move semantics C++ Rvalue References Explained  参考资源  C++那些事  参考书籍  C++ Primer Modern C++ Tutorial: C++ 11/14/17/20 On the Fly  </description>
+      <guid>https://haodongnj.github.io/haodongnj/post/kf/</guid>
+      <description>卡尔曼滤波小结 最近复习了一下卡尔曼滤波，并在Coursera上完成了课程与练习1，做些简单的笔记备忘。
+1. 线性卡尔曼滤波 简单来说，对于一个线性系统的状态，可以通过模型计算获取到一个基于模型的预测状态，再通过实际测量的值来纠正系统的状态。
+通过模型来更新状态   系统的控制方程为： $$ \check{x}_k = F_{k-1} \hat{x}_{k-1} + G_{k-1}u_{k-1} $$
+  更新状态协方差矩阵： $$ \check{P}_{k}= F_{k-1} \hat{P}_{k-1} F_{k-1}^{T} + L_{k-1} Q_{k-1} L_{k-1}^{T} $$</description>
     </item>
     
     <item>
@@ -51,21 +54,6 @@ $$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
       <description>unmet dependency 本着能省一事就省一事的原则，我装了Ubuntu 20.04 LTS，可是在安装ROS noetic的时候还是出现了unmet dependency的问题。 默认的&amp;ndash;fix-missing是没有用的，看看哪些包出问题了就用下面的命令强制覆写一下就OK了。 这些包一般会缓存在/var目录下的子目录里面，报错信息里面会有说明。
 sudo dpkg -i --force-overwrite &amp;lt;filename&amp;gt; sudo apt install --fix-missing  ros_readbagfile.py 这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。 在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。 从python2转换到python3解决了这个问题。
 # 改下文件头的解释器设置 #!</description>
-    </item>
-    
-    <item>
-      <title>生活的意义</title>
-      <link>https://haodongnj.github.io/haodongnj/post/life-meaning/</link>
-      <pubDate>Tue, 10 Nov 2020 23:50:43 +0800</pubDate>
-      
-      <guid>https://haodongnj.github.io/haodongnj/post/life-meaning/</guid>
-      <description>生活意义 我本来是不觉得生活本身有什么意义。看完Gorden Mathews的前两集讲座之后，也依然觉得生活本身并没有什么意义。不过确实认同工作最终是不适合成为生活的意义的。
-如果大多数人追寻生活的意义，那么社会就会瓦解。现实是大多数往往都会自动适应社会的惯例，自主地或随波逐流地将自己代入社会分工中去，并实行自我欺骗赋予生活以意义。
-从工作中获取地意义往往在于两点：
- 可衡量的进步：职称、薪资、销售额等等 创造  创造性的工作总是稀缺的，工作内容中的创造性部分也是稀缺的。而可衡量的进步往往更加实在、具体。
- 很多名言、书籍都会告诉人们应该如何生活，追寻怎样的人生，泛滥的引用充斥在各种角落。我只想引用一句散落在偏僻角落的话来作结：
- 当我还是一个相当早熟的少年的时候，我就已经深切地意识到，大多数人毫无休止地追逐的那些希望和努力都是毫无价值的。而且我不久就发现了这种追逐的残酷，这在当年较之今天是更加精心地用伪善和漂亮的字句掩饰着的。
- </description>
     </item>
     
     <item>
