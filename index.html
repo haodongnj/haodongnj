@@ -88,7 +88,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记">台式机折腾记</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -119,24 +119,6 @@ $$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
  $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：……
         </div>
         <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月20日
-        </date>
-        
-        <div class="post-content">
-            unmet dependency 本着能省一事就省一事的原则，我装了Ubuntu 20.04 LTS，可是在安装ROS noetic的时候还是出现了unmet dependency的问题。 默认的&ndash;fix-missing是没有用的，看看哪些包出问题了就用下面的命令强制覆写一下就OK了。 这些包一般会缓存在/var目录下的子目录里面，报错信息里面会有说明。
-sudo dpkg -i --force-overwrite &lt;filename&gt; sudo apt install --fix-missing  ros_readbagfile.py 这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。 在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。 从python2转换到python3解决了这个问题。
-# 改下文件头的解释器设置 #!……
-        </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/ros-learn/">阅读全文</a></p>
     </article>
     
     <article class="post">
@@ -359,15 +341,11 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记">台式机折腾记</a>
     </li>
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
-    </li>
-    
-    <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
     </li>
     
     <li>
@@ -417,8 +395,6 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 <div class="tagcloud">
     
     <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
-    
-    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
     

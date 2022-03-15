@@ -24,7 +24,7 @@
     </item>
     
     <item>
-      <title>AMD YES!</title>
+      <title>台式机折腾记</title>
       <link>https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/</link>
       <pubDate>Mon, 21 Jun 2021 22:36:50 +0800</pubDate>
       
@@ -43,17 +43,6 @@
 $$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
 且有：
  $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：</description>
-    </item>
-    
-    <item>
-      <title>刚开始学习ROS的一些坑(持续更新)</title>
-      <link>https://haodongnj.github.io/haodongnj/post/ros-learn/</link>
-      <pubDate>Sun, 20 Dec 2020 00:52:01 +0800</pubDate>
-      
-      <guid>https://haodongnj.github.io/haodongnj/post/ros-learn/</guid>
-      <description>unmet dependency 本着能省一事就省一事的原则，我装了Ubuntu 20.04 LTS，可是在安装ROS noetic的时候还是出现了unmet dependency的问题。 默认的&amp;ndash;fix-missing是没有用的，看看哪些包出问题了就用下面的命令强制覆写一下就OK了。 这些包一般会缓存在/var目录下的子目录里面，报错信息里面会有说明。
-sudo dpkg -i --force-overwrite &amp;lt;filename&amp;gt; sudo apt install --fix-missing  ros_readbagfile.py 这个文件呢本来是为了更有效率地阅读bag文件的，据wiki说比rostopic要快7倍。 在实际使用过程中出现了依赖问题，提示缺少动态链接库之类的。 从python2转换到python3解决了这个问题。
-# 改下文件头的解释器设置 #!</description>
     </item>
     
     <item>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>AMD YES! | Ramblings from Hao</title>
-    <meta property="og:title" content="AMD YES! - Ramblings from Hao">
+    <title>台式机折腾记 | Ramblings from Hao</title>
+    <meta property="og:title" content="台式机折腾记 - Ramblings from Hao">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-06-21T22:36:50&#43;08:00'>
@@ -17,7 +17,7 @@
     <meta property="article:modified_time" content='2021-06-21T22:36:50&#43;08:00'>
         
     <meta name="Keywords" content="Blog,Control">
-    <meta name="description" content="AMD YES!">
+    <meta name="description" content="台式机折腾记">
         
     <meta name="author" content="Hao Dong">
     <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/">
@@ -72,7 +72,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">AMD YES!</h1>
+            <h1 class="post-title">台式机折腾记</h1>
         </header>
         <date class="post-meta meta-date">
             2021年6月21日
@@ -114,6 +114,11 @@ setxkbmap -option ctrl:nocaps
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
 </code></pre>
+<p>后发现xcape可能会出现失效的情况，比较麻烦，所以改用了桌面自带的工具：</p>
+<ul>
+<li>Windows系统可采用<a href="https://docs.microsoft.com/zh-cn/windows/powertoys/">PowerToys</a>修改键盘映射，无需手动修改注册表</li>
+<li>Ubuntu可用桌面自带的设置来修改键盘映射, gnome的话可以考虑gnome-tweaks工具</li>
+</ul>
 <ol start="3">
 <li>配置grub记住上次的启动项目</li>
 </ol>
@@ -152,13 +157,13 @@ sudo update-grub
         
         <li><a href="/haodongnj/post/rl-deconvolve/">Richardson-Lucy Deconvolution</a></li>
         
-        <li><a href="/haodongnj/post/ros-learn/">刚开始学习ROS的一些坑(持续更新)</a></li>
-        
         <li><a href="/haodongnj/about/">关于我</a></li>
         
         <li><a href="/haodongnj/post/rpi-rt-kernel/">树莓派实时内核编译与测试</a></li>
         
         <li><a href="/haodongnj/post/bodeplot/">从伯德图说起</a></li>
+        
+        <li><a href="/haodongnj/post/matlab-sfunction/">Windows的MATLAB中用C语言写SFunction的一些坑</a></li>
         
     </ul>
 </div>
@@ -167,8 +172,6 @@ sudo update-grub
         <div class="post-meta meta-tags">
             
             <ul class="clearfix">
-                
-                <li><a href='/haodongnj/tags/amd'>AMD</a></li>
                 
                 <li><a href='/haodongnj/tags/5900x'>5900x</a></li>
                 
@@ -243,15 +246,11 @@ sudo update-grub
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记">台式机折腾记</a>
     </li>
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
-    </li>
-    
-    <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
     </li>
     
     <li>
@@ -301,8 +300,6 @@ sudo update-grub
 <div class="tagcloud">
     
     <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
-    
-    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
     
