@@ -35,7 +35,6 @@
     
 </head>
 
-
 <body>
     <header id="header" class="clearfix">
     <div class="container">
@@ -50,7 +49,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -74,17 +73,20 @@
         <header>
             <h1 class="post-title">树莓派实时内核编译与测试</h1>
         </header>
-        <date class="post-meta meta-date">
-            2019年6月12日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/embedded-software'>Embedded-Software</a></span>
-            
-        </div>
-        
+  <time datetime="2019-06-12T15:50:56Z" class="post-meta meta-date dt-published">
+    2019-06-12
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/embedded-software' target="_blank">Embedded-Software</a>
+  
+</div>
+
+
         
         
         <div class="post-content">
@@ -246,9 +248,9 @@ sudo apt install gnuplot # 该脚本使用gnuplot
             
             <ul class="clearfix">
                 
-                <li><a href='/haodongnj/tags/rpi'>RPi</a></li>
+                <li><a href='/haodongnj/tags/rpi' target="_blank">RPi</a></li>
                 
-                <li><a href='/haodongnj/tags/realtime'>realtime</a></li>
+                <li><a href='/haodongnj/tags/realtime' target="_blank">realtime</a></li>
                 
             </ul>
             
@@ -259,11 +261,14 @@ sudo apt install gnuplot # 该脚本使用gnuplot
 
     
     
+    
+    
+
 </div>
 
                     <footer id="footer">
     <div>
-        &copy; 2022 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        &copy; 2023 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
         
     </div>
     <br />
@@ -282,6 +287,7 @@ sudo apt install gnuplot # 该脚本使用gnuplot
 
 
     
+    
     <script type="text/javascript">
         window.MathJax = {
             tex2jax: {
@@ -290,11 +296,84 @@ sudo apt install gnuplot # 该脚本使用gnuplot
                 }
             };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
 
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
 
 
 
@@ -311,45 +390,49 @@ sudo apt install gnuplot # 该脚本使用gnuplot
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
-    
+
     <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
+        <h3 class="widget-title">Latest articles</h3>
 <ul class="widget-list">
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结">Kalman Filter小结</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/kow_how_to_access_name_in_templated_base_classes/" title="Kow how to access name in templated base classes" target="_blank">Kow how to access name in templated base classes</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记">台式机折腾记</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结" target="_blank">Kalman Filter小结</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记" target="_blank">台式机折腾记</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution" target="_blank">Richardson-Lucy Deconvolution</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试" target="_blank">树莓派实时内核编译与测试</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起" target="_blank">从伯德图说起</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑" target="_blank">Windows的MATLAB中用C语言写SFunction的一些坑</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller" target="_blank">C Language Implementation for Proportional-Resonant Controller</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)" target="_blank">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解" target="_blank">稳定性和振荡的频域理解</a>
     </li>
     
 </ul>
@@ -358,7 +441,7 @@ sudo apt install gnuplot # 该脚本使用gnuplot
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>Categories</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
@@ -371,7 +454,7 @@ sudo apt install gnuplot # 该脚本使用gnuplot
     </section>
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>Tags</a></h3>
 <div class="tagcloud">
     
     <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
@@ -405,7 +488,7 @@ sudo apt install gnuplot # 该脚本使用gnuplot
 
     
 <section class="widget">
-    <h3 class="widget-title">友情链接</h3>
+    <h3 class="widget-title">Links</h3>
     <ul class="widget-list">
         
         <li>
@@ -433,9 +516,9 @@ sudo apt install gnuplot # 该脚本使用gnuplot
 
 
     <section class="widget">
-        <h3 class="widget-title">其它</h3>
+        <h3 class="widget-title">Meta</h3>
         <ul class="widget-list">
-            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">RSS</a></li>
         </ul>
     </section>
 </div>

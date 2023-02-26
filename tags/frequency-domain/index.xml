@@ -6,11 +6,7 @@
     <description>Recent content in frequency-domain on Ramblings from Hao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 31 Mar 2017 01:57:46 +0800</lastBuildDate>
-    
-	<atom:link href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 31 Mar 2017 01:57:46 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>稳定性和振荡的频域理解</title>
       <link>https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/</link>

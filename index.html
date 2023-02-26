@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.68.3" />
+	<meta name="generator" content="Hugo 0.92.2" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,6 @@
     
 </head>
 
-
 <body>
     <header id="header" class="clearfix">
     <div class="container">
@@ -46,7 +45,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -66,104 +65,152 @@
                     
 <div class="res-cons">
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结">Kalman Filter小结</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年3月7日
-        </date>
-        
-        <div class="post-content">
-            卡尔曼滤波小结 最近复习了一下卡尔曼滤波，并在Coursera上完成了课程与练习1，做些简单的笔记备忘。
-1. 线性卡尔曼滤波 简单来说，对于一个线性系统的状态，可以通过模型计算获取到一个基于模型的预测状态，再通过实际测量的值来纠正系统的状态。
-通过模型来更新状态   系统的控制方程为： $$ \check{x}_k = F_{k-1} \hat{x}_{k-1} + G_{k-1}u_{k-1} $$
-  更新状态协方差矩阵： $$ \check{P}_{k}= F_{k-1} \hat{P}_{k-1} F_{k-1}^{T} + L_{k-1} Q_{k-1} L_{k-1}^{T} $$……
-        </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/kf/">阅读全文</a></p>
-    </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记">台式机折腾记</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/kow_how_to_access_name_in_templated_base_classes/" title="Kow how to access name in templated base classes" target="_blank">Kow how to access name in templated base classes</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2021年6月21日
-        </date>
         
+  <time datetime="2023-02-26T07:16:00Z" class="post-meta meta-date dt-published">
+    2023-02-26
+  </time>
+
+
+
+        <div class="post-content">
+            模板基类成员如何在继承类中访问 如题，最近在C++标准库的学习过程中，产生了这样的疑问。标准库中解决这个问题一共有3种方式：
+ 用using来指明该成员为依赖名称（dependent name） 直接把带模板参数的基类作用于成员名称前 采用this指针来指明该名称依赖于实例化后的类  这3种方式实际上都是在告知编译器，该成员是一个依赖名称，需要在实例化后才能找到。
+但是为什么呢？找寻了很久才发现了满意的答案。
+ Short answer: in order to make x a dependent name, so that lookup is deferred until the template parameter is known.……
+        </div>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/kow_how_to_access_name_in_templated_base_classes/" target="_blank">Continue reading</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结" target="_blank">Kalman Filter小结</a>
+            </h1>
+        </header>
+        
+  <time datetime="2022-03-07T14:03:22Z" class="post-meta meta-date dt-published">
+    2022-03-07
+  </time>
+
+
+
+        <div class="post-content">
+            卡尔曼滤波小结 最近复习了一下卡尔曼滤波，并在Coursera上完成了课程与练习1，做些简单的笔记备忘。
+1. 线性卡尔曼滤波 简单来说，对于一个线性系统的状态，可以通过模型计算获取到一个基于模型的预测状态，再通过实际测量的值来纠正系统的状态。
+通过模型来更新状态   系统的控制方程为： $$ \check{x}_k = F_{k-1} \hat{x}{k-1} + G{k-1}u_{k-1} $$
+  更新状态协方差矩阵： $$ \check{P}_{k}= F_{k-1} \hat{P}{k-1} F{k-1}^{T} + L_{k-1} Q_{k-1} L_{k-1}^{T} $$……
+        </div>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/kf/" target="_blank">Continue reading</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记" target="_blank">台式机折腾记</a>
+            </h1>
+        </header>
+        
+  <time datetime="2021-06-21T14:36:50Z" class="post-meta meta-date dt-published">
+    2021-06-21
+  </time>
+
+
+
         <div class="post-content">
             配置 趁着618攒了一台主机，犹豫了很久还是决定上车AMD，配置如下：
  CPU: AMD Ryzen-9 5900x 主板：TUF Gaming X570-Plus WIFI 硬盘：  1TB SSD KC2500 4TB HDD 西部数据蓝盘   Fury 32GB DDR4 3600MHz 美商海盗船AIR540中塔机箱 美商海盗船HX1200，1200W电源 GTX 750Ti显卡（等矿难）  装机的过程略去不表。记录一些配置工作：……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution" target="_blank">Richardson-Lucy Deconvolution</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2021年2月3日
-        </date>
         
+  <time datetime="2021-02-02T16:38:40Z" class="post-meta meta-date dt-published">
+    2021-02-03
+  </time>
+
+
+
         <div class="post-content">
             RL反卷积都干了些啥 RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。 损失函数是啥样的呢？
 $$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
 且有：
  $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试" target="_blank">树莓派实时内核编译与测试</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2019年6月12日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/embedded-software'>Embedded-Software</a></span>
-            
-        </div>
-        
+  <time datetime="2019-06-12T15:50:56Z" class="post-meta meta-date dt-published">
+    2019-06-12
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/embedded-software' target="_blank">Embedded-Software</a>
+  
+</div>
+
+
         <div class="post-content">
             1. 简介 本文档主要根据LeMaRiva的博客内容整理并基于最新的rt分支代码复现，简述以下2个方面：
  如何为树莓派编译实时内核 测试实时内核的进程调度延时性能  实验所需硬件：
  树莓派3B 8G TF卡  2. 编译 1.获取代码和工具：
 # From LeMaRiva mkdir rpi-rt cd rpi-rt mkdir rt-kernel # 用于存放编译产生的文件 cd rt-kernel mkdir boot cd .……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起" target="_blank">从伯德图说起</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2018年8月31日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
-            
-        </div>
-        
+  <time datetime="2018-08-30T16:43:25Z" class="post-meta meta-date dt-published">
+    2018-08-31
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/control' target="_blank">Control</a>
+  
+</div>
+
+
         <div class="post-content">
             在当初学《自动控制原理》的时候，并没有去理解公式背后的意义，囫囵吞枣式地做题、计算、画图。现在想来，传递函数的计算、根轨迹的绘制甚至是伯德图的快速绘制方法都记不得了，但是在实践和仿真中，对于概念的理解更深入了些，所以写下。本文从伯德图说起，讲了以下3个方面：
  伯德图表示什么 开环伯德图表示什么 伯德积分定理意味着什么  伯德图表示什么 伯德图是从频域的概念来描述系统的性质、表现的。如果我们考虑最简单的系统——比例环节：
@@ -173,74 +220,89 @@ $$G_{p} = K_{p}$$
 那么如果我们考虑常见的一阶惯性环节呢：
 $$ G_{rc} = \frac{1}{T_{s}s + 1} $$……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/bodeplot/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑" target="_blank">Windows的MATLAB中用C语言写SFunction的一些坑</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2018年7月9日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/simulation'>Simulation</a></span>
-            
-        </div>
-        
+  <time datetime="2018-07-09T15:46:03Z" class="post-meta meta-date dt-published">
+    2018-07-09
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/simulation' target="_blank">Simulation</a>
+  
+</div>
+
+
         <div class="post-content">
             1.测试环境  操作系统：Windows 10, 64bit 编译器：MinGW64  32位系统请下载对应的32位版本   MATLAB2017a  2017a之后会略有不同    2. 配置环境与流程   下载编译器MinGW64，对于64位系统而言，需要下载个安装器，可以安装相应版本的gcc编译器，我选择的是gcc-4.9.4，在测试环境中可以正常运行
  安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&quot;C:&quot;。    验证一下：……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller" target="_blank">C Language Implementation for Proportional-Resonant Controller</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2018年6月22日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
-            
-        </div>
-        
+  <time datetime="2018-06-21T18:13:54Z" class="post-meta meta-date dt-published">
+    2018-06-22
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/control' target="_blank">Control</a>
+  
+</div>
+
+
         <div class="post-content">
             1. Introduction to Proportional-Resonant Controller First, let&rsquo;s see the transfer function of PR controller and its bode diagram:
 $$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/pr-control/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/pr-control/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)" target="_blank">Discretization method(离散化方法)</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2017年10月27日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
-            
-        </div>
-        
+  <time datetime="2017-10-26T17:58:28Z" class="post-meta meta-date dt-published">
+    2017-10-27
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/control' target="_blank">Control</a>
+  
+</div>
+
+
         <div class="post-content">
             离散化方法的笔记 最近看论文中发现，分析系统的稳定性问题总免不了在s域先分析一下，然后再在z域上分析一下。可是很多论文对于离散化方法却略去不提，直接给出推导出的结果。所以笔者就寻找总结了一下各种离散化方法，总结一下。学通信或者测量的同学，专门学过数字信号处理的话，应该很熟悉的。
 1. 后向差分 后向差分的映射关系为：
@@ -252,26 +314,31 @@ $$ s \leftarrow \frac{z-1}{T} $$
 从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。
  3.……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/descretization-method/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" target="_blank">Continue reading</a></p>
     </article>
+    
+    
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解" target="_blank">稳定性和振荡的频域理解</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2017年3月31日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
-            
-        </div>
-        
+  <time datetime="2017-03-30T17:57:46Z" class="post-meta meta-date dt-published">
+    2017-03-31
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/control' target="_blank">Control</a>
+  
+</div>
+
+
         <div class="post-content">
             系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
 因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
@@ -280,8 +347,9 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
  对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
 毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" target="_blank">Continue reading</a></p>
     </article>
+    
     
     
 
@@ -293,7 +361,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
                     <footer id="footer">
     <div>
-        &copy; 2022 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        &copy; 2023 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
         
     </div>
     <br />
@@ -319,7 +387,6 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
 
 
-
                 </div>
 
                 <div id="secondary">
@@ -331,45 +398,49 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
-    
+
     <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
+        <h3 class="widget-title">Latest articles</h3>
 <ul class="widget-list">
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结">Kalman Filter小结</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/kow_how_to_access_name_in_templated_base_classes/" title="Kow how to access name in templated base classes" target="_blank">Kow how to access name in templated base classes</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记">台式机折腾记</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结" target="_blank">Kalman Filter小结</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记" target="_blank">台式机折腾记</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution" target="_blank">Richardson-Lucy Deconvolution</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试" target="_blank">树莓派实时内核编译与测试</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起" target="_blank">从伯德图说起</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑" target="_blank">Windows的MATLAB中用C语言写SFunction的一些坑</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller" target="_blank">C Language Implementation for Proportional-Resonant Controller</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)" target="_blank">Discretization method(离散化方法)</a>
+    </li>
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解" target="_blank">稳定性和振荡的频域理解</a>
     </li>
     
 </ul>
@@ -378,7 +449,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>Categories</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
@@ -391,7 +462,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
     </section>
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>Tags</a></h3>
 <div class="tagcloud">
     
     <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
@@ -425,7 +496,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
     
 <section class="widget">
-    <h3 class="widget-title">友情链接</h3>
+    <h3 class="widget-title">Links</h3>
     <ul class="widget-list">
         
         <li>
@@ -453,9 +524,9 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
 
     <section class="widget">
-        <h3 class="widget-title">其它</h3>
+        <h3 class="widget-title">Meta</h3>
         <ul class="widget-list">
-            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">RSS</a></li>
         </ul>
     </section>
 </div>
