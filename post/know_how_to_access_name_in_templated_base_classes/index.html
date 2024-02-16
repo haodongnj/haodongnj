@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>stability | Ramblings from Hao</title>
-    <meta property="og:title" content="stability - Ramblings from Hao">
+    <title>Kow how to access name in templated base classes | Ramblings from Hao</title>
+    <meta property="og:title" content="Kow how to access name in templated base classes - Ramblings from Hao">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2023-02-26T15:16:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2023-02-26T15:16:00&#43;08:00'>
         
     <meta name="Keywords" content="Blog,Control">
-    <meta name="description" content="stability">
+    <meta name="description" content="Kow how to access name in templated base classes">
         
     <meta name="author" content="Hao Dong">
-    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/tags/stability/">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/know_how_to_access_name_in_templated_base_classes/">
     <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
     <link rel="stylesheet" href='/haodongnj/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://haodongnj.github.io/haodongnj/tags/stability/index.xml" title="Ramblings from Hao" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -46,7 +49,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://haodongnj.github.io/haodongnj">Home</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -66,77 +69,86 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        
-        <span>4</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span class="keyword">stability</span>
-        articles
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" target="_blank">稳定性和振荡的频域理解</a>
-            </h1>
+            <h1 class="post-title">Kow how to access name in templated base classes</h1>
         </header>
         
-  <time datetime="2017-03-30T17:57:46Z" class="post-meta meta-date dt-published">
-    2017-03-31
+  <time datetime="2023-02-26T07:16:00Z" class="post-meta meta-date dt-published">
+    2023-02-26
   </time>
 
 
-<div class="post-meta meta-category">
-  <span>&nbsp;|</span>
-  
-    <a href='/haodongnj/categories/control' target="_blank">Control</a>
-  
+
+        
+        
+        <div class="post-content">
+            <h2 id="模板基类成员如何在继承类中访问">模板基类成员如何在继承类中访问</h2>
+<p>如题，最近在C++标准库的学习过程中，产生了这样的疑问。标准库中解决这个问题一共有3种方式：</p>
+<ol>
+<li>用using来指明该成员为依赖名称（<a href="https://en.cppreference.com/w/cpp/language/dependent_name">dependent name</a>）</li>
+<li>直接把带模板参数的基类作用于成员名称前</li>
+<li>采用this指针来指明该名称依赖于实例化后的类</li>
+</ol>
+<p>这3种方式实际上都是在告知编译器，该成员是一个依赖名称，需要在实例化后才能找到。</p>
+<p>但是为什么呢？找寻了很久才发现了满意的答案。</p>
+<blockquote>
+<p>Short answer: in order to make x a dependent name, so that lookup is deferred until the template parameter is known.</p>
+</blockquote>
+<blockquote>
+<p>Long answer: when a compiler sees a template, it is supposed to perform certain checks immediately, without seeing the template parameter. Others are deferred until the parameter is known. It&rsquo;s called two-phase compilation, and MSVC doesn&rsquo;t do it but it&rsquo;s required by the standard and implemented by the other major compilers. If you like, the compiler must compile the template as soon as it sees it (to some kind of internal parse tree representation), and defer compiling the instantiation until later.</p>
+</blockquote>
+<blockquote>
+<p>The checks that are performed on the template itself, rather than on particular instantiations of it, require that the compiler be able to resolve the grammar of the code in the template.</p>
+</blockquote>
+<h2 id="参考">参考</h2>
+<ol>
+<li>
+<p><a href="https://stackoverflow.com/questions/4643074/why-do-i-have-to-access-template-base-class-members-through-the-this-pointer">stack overflow: Why do I have to access template base class members through the this pointer?</a></p>
+</li>
+<li>
+<p><a href="https://en.cppreference.com/w/cpp/language/dependent_name">dependent name</a></p>
+</li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/haodongnj/post/kf/">Kalman Filter小结</a></li>
+        
+        <li><a href="/haodongnj/post/ryzen-5900x-pc/">台式机折腾记</a></li>
+        
+        <li><a href="/haodongnj/post/rl-deconvolve/">Richardson-Lucy Deconvolution</a></li>
+        
+        <li><a href="/haodongnj/about/">关于我</a></li>
+        
+        <li><a href="/haodongnj/post/rpi-rt-kernel/">树莓派实时内核编译与测试</a></li>
+        
+    </ul>
 </div>
 
 
-        <div class="post-content">
-            系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
-因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
-fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
- 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
- 对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
-毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
-            <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" target="_blank">Continue reading</a></p>
+        <div class="post-meta meta-tags">
+            
+            No tags
+            
         </div>
     </article>
     
-
     
 
-
-
-
+    
+    
+    
+    
 
 </div>
 
@@ -160,9 +172,94 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 </footer>
 
 
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
 
 
 

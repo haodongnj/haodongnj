@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 26 Feb 2023 15:16:00 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kow how to access name in templated base classes</title>
-      <link>https://haodongnj.github.io/haodongnj/post/kow_how_to_access_name_in_templated_base_classes/</link>
+      <link>https://haodongnj.github.io/haodongnj/post/know_how_to_access_name_in_templated_base_classes/</link>
       <pubDate>Sun, 26 Feb 2023 15:16:00 +0800</pubDate>
       
-      <guid>https://haodongnj.github.io/haodongnj/post/kow_how_to_access_name_in_templated_base_classes/</guid>
+      <guid>https://haodongnj.github.io/haodongnj/post/know_how_to_access_name_in_templated_base_classes/</guid>
       <description>模板基类成员如何在继承类中访问 如题，最近在C++标准库的学习过程中，产生了这样的疑问。标准库中解决这个问题一共有3种方式：
  用using来指明该成员为依赖名称（dependent name） 直接把带模板参数的基类作用于成员名称前 采用this指针来指明该名称依赖于实例化后的类  这3种方式实际上都是在告知编译器，该成员是一个依赖名称，需要在实例化后才能找到。
 但是为什么呢？找寻了很久才发现了满意的答案。
