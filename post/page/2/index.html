@@ -32,7 +32,6 @@
     
 </head>
 
-
 <body>
     <header id="header" class="clearfix">
     <div class="container">
@@ -43,11 +42,11 @@
                         Ramblings from Hao
                     </a>
                 
-                <p class="description">控制、感知与编程</p>
+                <p class="description">Something interesting.</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://haodongnj.github.io/haodongnj">首页</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -71,20 +70,23 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解">稳定性和振荡的频域理解</a>
+                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" title="稳定性和振荡的频域理解" target="_blank">稳定性和振荡的频域理解</a>
             </h1>
         </header>
-        <date class="post-meta meta-date">
-            2017年3月31日
-        </date>
         
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/haodongnj/categories/control'>Control</a></span>
-            
-        </div>
-        
+  <time datetime="2017-03-30T17:57:46Z" class="post-meta meta-date dt-published">
+    2017-03-31
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/haodongnj/categories/control' target="_blank">Control</a>
+  
+</div>
+
+
         <div class="post-content">
             系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
 因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
@@ -93,7 +95,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
  对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
 毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
         </div>
-        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/">阅读全文</a></p>
+        <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" target="_blank">Continue reading</a></p>
     </article>
     
     
@@ -104,7 +106,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 <ol class="page-navigator">
     
     <li class="prev">
-        <a href="https://haodongnj.github.io/haodongnj/post/">上一页</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/">Previous</a>
     </li>
     
 
@@ -127,7 +129,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
                     <footer id="footer">
     <div>
-        &copy; 2021 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        &copy; 2024 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
         
     </div>
     <br />
@@ -153,7 +155,6 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
 
 
-
                 </div>
 
                 <div id="secondary">
@@ -165,49 +166,49 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
-    
+
     <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
+        <h3 class="widget-title">Latest articles</h3>
 <ul class="widget-list">
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rvalue_of_cpp/" title="C&#43;&#43;学习小结">C&#43;&#43;学习小结</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/cling-jupyter-notebook/" title="Cling Jupyter Notebook" target="_blank">Cling Jupyter Notebook</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="AMD YES!">AMD YES!</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/know_how_to_access_name_in_templated_base_classes/" title="Know how to access name in templated base classes" target="_blank">Know how to access name in templated base classes</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution">Richardson-Lucy Deconvolution</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/kf/" title="Kalman Filter小结" target="_blank">Kalman Filter小结</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/ros-learn/" title="刚开始学习ROS的一些坑(持续更新)">刚开始学习ROS的一些坑(持续更新)</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/" title="台式机折腾记" target="_blank">台式机折腾记</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/life-meaning/" title="生活的意义">生活的意义</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/" title="Richardson-Lucy Deconvolution" target="_blank">Richardson-Lucy Deconvolution</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试">树莓派实时内核编译与测试</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/" title="树莓派实时内核编译与测试" target="_blank">树莓派实时内核编译与测试</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起">从伯德图说起</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" title="从伯德图说起" target="_blank">从伯德图说起</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑">Windows的MATLAB中用C语言写SFunction的一些坑</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑" target="_blank">Windows的MATLAB中用C语言写SFunction的一些坑</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller">C Language Implementation for Proportional-Resonant Controller</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller" target="_blank">C Language Implementation for Proportional-Resonant Controller</a>
     </li>
     
     <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)">Discretization method(离散化方法)</a>
+        <a href="https://haodongnj.github.io/haodongnj/post/descretization-method/" title="Discretization method(离散化方法)" target="_blank">Discretization method(离散化方法)</a>
     </li>
     
 </ul>
@@ -216,7 +217,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/categories/'>分类</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>Categories</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
@@ -229,12 +230,10 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
     </section>
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/tags/'>标签</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>Tags</a></h3>
 <div class="tagcloud">
     
     <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
-    
-    <a href="https://haodongnj.github.io/haodongnj/tags/amd/">AMD</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/bodeplot/">Bodeplot</a>
     
@@ -265,7 +264,7 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
     
 <section class="widget">
-    <h3 class="widget-title">友情链接</h3>
+    <h3 class="widget-title">Links</h3>
     <ul class="widget-list">
         
         <li>
@@ -281,10 +280,6 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
         </li>
         
         <li>
-            <a target="_blank" href="https://jifanchn.github.io" title="十几秒的光照">十几秒的光照</a>
-        </li>
-        
-        <li>
             <a target="_blank" href="https://blog.xizhibei.me" title="须臾之学">须臾之学</a>
         </li>
         
@@ -297,9 +292,9 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 
 
     <section class="widget">
-        <h3 class="widget-title">其它</h3>
+        <h3 class="widget-title">Meta</h3>
         <ul class="widget-list">
-            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">文章 RSS</a></li>
+            <li><a href="https://haodongnj.github.io/haodongnj/index.xml">RSS</a></li>
         </ul>
     </section>
 </div>

@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>frequency-domain | Ramblings from Hao</title>
-    <meta property="og:title" content="frequency-domain - Ramblings from Hao">
+    <title>Cling Jupyter Notebook | Ramblings from Hao</title>
+    <meta property="og:title" content="Cling Jupyter Notebook - Ramblings from Hao">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2024-02-20T21:05:21&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2024-02-20T21:05:21&#43;08:00'>
         
     <meta name="Keywords" content="Blog,Control">
-    <meta name="description" content="frequency-domain">
+    <meta name="description" content="Cling Jupyter Notebook">
         
     <meta name="author" content="Hao Dong">
-    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/cling-jupyter-notebook/">
     <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
     <link rel="stylesheet" href='/haodongnj/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/index.xml" title="Ramblings from Hao" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -46,7 +49,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://haodongnj.github.io/haodongnj">Home</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -66,77 +69,97 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        
-        <span>4</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span>1</span>
-        
-        <span class="keyword">frequency-domain</span>
-        articles
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" target="_blank">稳定性和振荡的频域理解</a>
-            </h1>
+            <h1 class="post-title">Cling Jupyter Notebook</h1>
         </header>
         
-  <time datetime="2017-03-30T17:57:46Z" class="post-meta meta-date dt-published">
-    2017-03-31
+  <time datetime="2024-02-20T13:05:21Z" class="post-meta meta-date dt-published">
+    2024-02-20
   </time>
 
 
-<div class="post-meta meta-category">
-  <span>&nbsp;|</span>
-  
-    <a href='/haodongnj/categories/control' target="_blank">Control</a>
-  
+
+        
+        
+        <div class="post-content">
+            <h1 id="cling-jupyter-notebook">Cling Jupyter Notebook</h1>
+<p>最近开始学习C++20相关的特性，需要经常性地写一些代码进行验证工作，试用了一下<a href="https://github.com/root-project/cling">cling</a>，感觉不错，记录一下。</p>
+<p>之前也留意到<a href="https://github.com/jupyter-xeus/xeus-cling">xeus-cling</a>项目，尝试了用conda拉取失败，遂放弃，自己动手编译吧。</p>
+<h2 id="编译">编译</h2>
+<p>按照Readme来编译还是有点小坑的，主要有以下：</p>
+<ol>
+<li><a href="https://github.com/jupyter-xeus/xeus-cling">cmake 指令问题</a>，大小写有点坑，这个issue算是解决了。</li>
+<li>OOM问题：需要编译cling和root-project的llvm工程，如果采用多线程编译的话，笔记本32G的内存还是会有内存不够用的情况。将线程数量调小就可以避免，问题不大。编译完成后，cling-build目录竟然有95GB。</li>
+</ol>
+<h2 id="jupyter-notebook">Jupyter notebook</h2>
+<p>默认的安装目录为/usr/local，不过Jupyter相关的文件并没有安装到这个目录下，需要自己到工程目录下去找 <a href="https://github.com/root-project/cling/tree/master/tools/Jupyter">cling/tools/Jupyter</a>。</p>
+<p>自行安装配置好Python3的venv后，按照<a href="https://github.com/root-project/cling/blob/master/tools/Jupyter/README.md">ReadMe</a>的说明配置一下就可以。</p>
+<p>如果要尝试一下C++20的特性，可以参考<a href="https://github.com/root-project/cling/pull/520">#520</a>为Jupyter notebook增加 C++20 的入口。不过需要留意一下编译时gcc的版本，笔者用的Debian 12自带的默认gcc版本为12.2，支持大部分C++20的语言特性。gcc对C++语言标准的支持可参考<a href="https://gcc.gnu.org/projects/cxx-status.html#cxx20">C++20 Support in GCC</a>。</p>
+<h2 id="效果">效果</h2>
+<pre><code class="language-C++">#include &lt;ranges&gt;
+#include &lt;numeric&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+
+namespace views = std::views;
+namespace ranges = std::ranges;
+
+std::vector ints{0, 1, 2, 3, 4};
+
+auto rv = ints | views::reverse ;
+for(auto i : rv){
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+}
+
+</code></pre>
+<p>
+        <img class="mx-auto" alt="C&#43;&#43;20 views test" src="jupyter-notebook-cpp20.png" />   
+    </p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="blog.coldflake.com/posts/On-the-fly-C++/">Using cling to interpret C++ code</a></li>
+<li><a href="https://root.cern">ROOT</a></li>
+</ul>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/haodongnj/post/know_how_to_access_name_in_templated_base_classes/">Know how to access name in templated base classes</a></li>
+        
+        <li><a href="/haodongnj/post/kf/">Kalman Filter小结</a></li>
+        
+        <li><a href="/haodongnj/post/ryzen-5900x-pc/">台式机折腾记</a></li>
+        
+        <li><a href="/haodongnj/post/rl-deconvolve/">Richardson-Lucy Deconvolution</a></li>
+        
+        <li><a href="/haodongnj/about/">关于我</a></li>
+        
+    </ul>
 </div>
 
 
-        <div class="post-content">
-            系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
-因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
-fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
- 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
- 对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
-毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)……
-            <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/" target="_blank">Continue reading</a></p>
+        <div class="post-meta meta-tags">
+            
+            No tags
+            
         </div>
     </article>
     
-
     
 
-
-
-
+    
+    
+    
+    
 
 </div>
 
@@ -160,9 +183,94 @@ fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到
 </footer>
 
 
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
 
 
 
