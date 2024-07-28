@@ -4,125 +4,100 @@
     <title>Tags on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/tags/</link>
     <description>Recent content in Tags on Ramblings from Hao</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 21 Jun 2021 22:36:50 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Jun 2021 22:36:50 +0800</lastBuildDate>
+    <atom:link href="https://haodongnj.github.io/haodongnj/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5900x</title>
       <link>https://haodongnj.github.io/haodongnj/tags/5900x/</link>
       <pubDate>Mon, 21 Jun 2021 22:36:50 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/5900x/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>debluring</title>
+      <title>Debluring</title>
       <link>https://haodongnj.github.io/haodongnj/tags/debluring/</link>
       <pubDate>Wed, 03 Feb 2021 00:38:40 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/debluring/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>PSF</title>
       <link>https://haodongnj.github.io/haodongnj/tags/psf/</link>
       <pubDate>Wed, 03 Feb 2021 00:38:40 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/psf/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>realtime</title>
+      <title>Realtime</title>
       <link>https://haodongnj.github.io/haodongnj/tags/realtime/</link>
       <pubDate>Wed, 12 Jun 2019 23:50:56 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/realtime/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>RPi</title>
       <link>https://haodongnj.github.io/haodongnj/tags/rpi/</link>
       <pubDate>Wed, 12 Jun 2019 23:50:56 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/rpi/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Bodeplot</title>
       <link>https://haodongnj.github.io/haodongnj/tags/bodeplot/</link>
       <pubDate>Fri, 31 Aug 2018 00:43:25 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/bodeplot/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Control</title>
       <link>https://haodongnj.github.io/haodongnj/tags/control/</link>
       <pubDate>Fri, 31 Aug 2018 00:43:25 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/control/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MATLAB</title>
       <link>https://haodongnj.github.io/haodongnj/tags/matlab/</link>
       <pubDate>Mon, 09 Jul 2018 23:46:03 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/matlab/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Simulation</title>
       <link>https://haodongnj.github.io/haodongnj/tags/simulation/</link>
       <pubDate>Mon, 09 Jul 2018 23:46:03 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/simulation/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>PR</title>
       <link>https://haodongnj.github.io/haodongnj/tags/pr/</link>
       <pubDate>Fri, 22 Jun 2018 02:13:54 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/pr/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>descretization-method</title>
+      <title>Descretization-Method</title>
       <link>https://haodongnj.github.io/haodongnj/tags/descretization-method/</link>
       <pubDate>Fri, 27 Oct 2017 01:58:28 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/descretization-method/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>frequency-domain</title>
+      <title>Frequency-Domain</title>
       <link>https://haodongnj.github.io/haodongnj/tags/frequency-domain/</link>
       <pubDate>Fri, 31 Mar 2017 01:57:46 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/frequency-domain/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>stability</title>
+      <title>Stability</title>
       <link>https://haodongnj.github.io/haodongnj/tags/stability/</link>
       <pubDate>Fri, 31 Mar 2017 01:57:46 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/tags/stability/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

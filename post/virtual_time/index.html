@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Simulation | Ramblings from Hao</title>
-    <meta property="og:title" content="Simulation - Ramblings from Hao">
+    <title>Virtual time，多进程共享虚拟时间原型验证 | Ramblings from Hao</title>
+    <meta property="og:title" content="Virtual time，多进程共享虚拟时间原型验证 - Ramblings from Hao">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2024-07-28T21:57:36&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2024-07-28T21:57:36&#43;08:00'>
         
     <meta name="Keywords" content="Blog,Control">
-    <meta name="description" content="Simulation">
+    <meta name="description" content="Virtual time，多进程共享虚拟时间原型验证">
         
     <meta name="author" content="Hao Dong">
-    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/categories/simulation/">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/virtual_time/">
     <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
     <link rel="stylesheet" href='/haodongnj/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://haodongnj.github.io/haodongnj/categories/simulation/index.xml" title="Ramblings from Hao" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -46,7 +49,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://haodongnj.github.io/haodongnj/">Home</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj/">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -66,49 +69,69 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">Simulation</span>
-        articles
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" target="_blank">Windows的MATLAB中用C语言写SFunction的一些坑</a>
-            </h1>
+            <h1 class="post-title">Virtual time，多进程共享虚拟时间原型验证</h1>
         </header>
         
-  <time datetime="2018-07-09T15:46:03Z" class="post-meta meta-date dt-published">
-    2018-07-09
+  <time datetime="2024-07-28T13:57:36Z" class="post-meta meta-date dt-published">
+    2024-07-28
   </time>
 
 
-<div class="post-meta meta-category">
-  <span>&nbsp;|</span>
-  
-    <a href='/haodongnj/categories/simulation' target="_blank">Simulation</a>
-  
+
+        
+        
+        <div class="post-content">
+            <p>周末抽空想了想数据回放的时间戳问题，想到了一个比较有意思的方案，就是使用虚拟时间。所以就尝试采用多进程共享虚拟时间的方式来劫持系统时间戳，尝试满足数据回放过程中的功能代码对系统时间戳需求。</p>
+<ul>
+<li>一般而言，像ROS或者DDS的消息数据都是带有时间戳的，比如录制时间戳，消息内部header中保存的数据源时间戳或者数据对应的有效时刻的时间戳等等</li>
+<li>对于实际生产环境中的功能逻辑代码，可能会依赖于系统时间戳来进行一些逻辑判断，比如超时判断，定时器；又或者对不同来源（不同topic、不同帧率）的时间戳的消息进行时间戳对齐或者插值等等，这些都是对时间戳的依赖。而如果软件没有对获取时间戳的接口进行封装，那么在采用类似于Pub/Sub的方式对数据回放的时候，就会出现问题，因为数据回放的时间戳是不可控的，可能会导致功能逻辑的错误。</li>
+<li>对于单进程的数据回放程序，可以使用消息录制时的时间戳来作为虚拟的仿真系统时间戳，这样的话，原有的代码逻辑就可以直接使用这个时间戳来进行仿真</li>
+<li>对于多进程节点，数据通过类似于DDS Pub/Sub的方式进行传输，那么就需要对时间戳进行额外的处理；对系统时间戳进行劫持，然后通过共享内存的方式来共享虚拟时间戳是一个看上去能走通的方案（当然，未必是最优的）</li>
+</ul>
+<p>实现的思路非常简单，那就是可以根据消息对应的录制时间戳和消息内部的时间戳（其实一般前者应该就够了），来更新虚拟的时间戳，并将这个虚拟时间戳通过共享内存的方式共享给其他进程。这样的话，其他进程就可以通过读取共享内存的方式来获取虚拟时间戳。</p>
+<p>该虚拟时间戳，可以通过劫持<code>libc</code>中的<code>gettimeofday</code>、<code>clock_gettime</code>等函数来实现，这样的话，就可以在不修改原有代码的情况下，来实现对系统时间戳的劫持；这可以通过将动态库指定到<code>LD_PRELOAD</code>的方式来实现。</p>
+<p>具体原型代码实现可见 <a href="https://github.com/haodongnj/playground/tree/master/utils/virtual_timestamp">Virtual timestamp</a>。该实现仅为虚拟时间戳多进程更新和共享的原型验证，实际应用中还需要考虑更多的问题，比如定时器回调的处理，进程异常退出后共享内存的释放等等。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/haodongnj/post/know_how_to_access_name_in_templated_base_classes/">Know how to access name in templated base classes</a></li>
+        
+        <li><a href="/haodongnj/post/kf/">Kalman Filter小结</a></li>
+        
+        <li><a href="/haodongnj/post/ryzen-5900x-pc/">台式机折腾记</a></li>
+        
+        <li><a href="/haodongnj/post/rl-deconvolve/">Richardson-Lucy Deconvolution</a></li>
+        
+        <li><a href="/haodongnj/about/">关于我</a></li>
+        
+    </ul>
 </div>
 
 
-        <div class="post-content">
-            1.测试环境 操作系统：Windows 10, 64bit 编译器：MinGW64 32位系统请下载对应的32位版本 MATLAB2017a 2017a之后会略有不同 2. 配置环境与流程 下载编译器MinGW64，对于64位系统而言，需要下载个安装器，可以安装相应版本的gcc编译器，我选择的是gcc-4.9.4，在测试环境中可以正常运行
-安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&quot;C:&quot;。 验证一下：
-setenv('MW_MINGW64_LOC','C:\mingw64') % 先配置环境 mex -setup 输出如下图所示，这样MinGW编译器就配置好了。
-3. a + b 编译测试 setenv('MW_MINGW64_LOC','C:\mingw64') myFunctionName = 'SFunctionName' def = legacy_code('initialize'); def.……
-            <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" target="_blank">Continue reading</a></p>
+        <div class="post-meta meta-tags">
+            
+            No tags
+            
         </div>
     </article>
     
-
     
 
-
-
-
+    
+    
+    
+    
 
 </div>
 
@@ -132,9 +155,94 @@ setenv('MW_MINGW64_LOC','C:\mingw64') % 先配置环境 mex -setup 输出如下�
 </footer>
 
 
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/haodongnj/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
 
 
 

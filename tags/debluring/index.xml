@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>debluring on Ramblings from Hao</title>
+    <title>Debluring on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/tags/debluring/</link>
-    <description>Recent content in debluring on Ramblings from Hao</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Debluring on Ramblings from Hao</description>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 03 Feb 2021 00:38:40 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/tags/debluring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Feb 2021 00:38:40 +0800</lastBuildDate>
+    <atom:link href="https://haodongnj.github.io/haodongnj/tags/debluring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Richardson-Lucy Deconvolution</title>
       <link>https://haodongnj.github.io/haodongnj/post/rl-deconvolve/</link>
       <pubDate>Wed, 03 Feb 2021 00:38:40 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/post/rl-deconvolve/</guid>
-      <description>RL反卷积都干了些啥 RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。 损失函数是啥样的呢？
-$$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$
-且有：
- $J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘  既然要优化$J(O)$，那么就对O求导：</description>
+      <description>RL反卷积都干了些啥 RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。 损失函数是啥样的呢？&#xA;$$ J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF)) $$&#xA;且有：&#xA;$J$，损失函数，为最小化的目标 $O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像 $PSF(x,y)$，Point Spread Function，点分布函数 $I(x,y)$，实际拍摄到的图像 $**$，二维卷积 $\cdot$，按元素相乘 既然要优化$J(O)$，那么就对O求导：</description>
     </item>
-    
   </channel>
 </rss>
