@@ -4,16 +4,18 @@
     <title>Simulation on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/categories/simulation/</link>
     <description>Recent content in Simulation on Ramblings from Hao</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 09 Jul 2018 23:46:03 +0800</lastBuildDate>
-    <atom:link href="https://haodongnj.github.io/haodongnj/categories/simulation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Jul 2018 23:46:03 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/categories/simulation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows的MATLAB中用C语言写SFunction的一些坑</title>
       <link>https://haodongnj.github.io/haodongnj/post/matlab-sfunction/</link>
       <pubDate>Mon, 09 Jul 2018 23:46:03 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/matlab-sfunction/</guid>
-      <description>1.测试环境 操作系统：Windows 10, 64bit 编译器：MinGW64 32位系统请下载对应的32位版本 MATLAB2017a 2017a之后会略有不同 2. 配置环境与流程 下载编译器MinGW64，对于64位系统而言，需要下载个安装器，可以安装相应版本的gcc编译器，我选择的是gcc-4.9.4，在测试环境中可以正常运行&#xA;安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&amp;quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&amp;quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&amp;quot;C:&amp;quot;。 验证一下：&#xA;setenv(&#39;MW_MINGW64_LOC&#39;,&#39;C:\mingw64&#39;) % 先配置环境 mex -setup 输出如下图所示，这样MinGW编译器就配置好了。&#xA;3. a + b 编译测试 setenv(&#39;MW_MINGW64_LOC&#39;,&#39;C:\mingw64&#39;) myFunctionName = &#39;SFunctionName&#39; def = legacy_code(&#39;initialize&#39;); def.</description>
+      <description>1.测试环境  操作系统：Windows 10, 64bit 编译器：MinGW64  32位系统请下载对应的32位版本   MATLAB2017a  2017a之后会略有不同    2. 配置环境与流程   下载编译器MinGW64，对于64位系统而言，需要下载个安装器，可以安装相应版本的gcc编译器，我选择的是gcc-4.9.4，在测试环境中可以正常运行
+ 安装器是mingw-w64-install，安装时注意选择64位，同时安装完了还有一个坑：空格。 下载器默认的安装路径&amp;quot;C:Files-w64_64-4.9.4-win32-seh-rt_v5-rev0&amp;quot;是包含有空格的，MATLAB并不能识别该路径，所以可以把mingw64移动到不含空格的路径下，比如&amp;quot;C:&amp;quot;。    验证一下：</description>
     </item>
+    
   </channel>
 </rss>

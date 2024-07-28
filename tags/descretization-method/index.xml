@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Descretization-Method on Ramblings from Hao</title>
+    <title>descretization-method on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/tags/descretization-method/</link>
-    <description>Recent content in Descretization-Method on Ramblings from Hao</description>
-    <generator>Hugo</generator>
+    <description>Recent content in descretization-method on Ramblings from Hao</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 27 Oct 2017 01:58:28 +0800</lastBuildDate>
-    <atom:link href="https://haodongnj.github.io/haodongnj/tags/descretization-method/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Oct 2017 01:58:28 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/tags/descretization-method/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Discretization method(离散化方法)</title>
       <link>https://haodongnj.github.io/haodongnj/post/descretization-method/</link>
       <pubDate>Fri, 27 Oct 2017 01:58:28 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/descretization-method/</guid>
-      <description>离散化方法的笔记 最近看论文中发现，分析系统的稳定性问题总免不了在s域先分析一下，然后再在z域上分析一下。可是很多论文对于离散化方法却略去不提，直接给出推导出的结果。所以笔者就寻找总结了一下各种离散化方法，总结一下。学通信或者测量的同学，专门学过数字信号处理的话，应该很熟悉的。&#xA;1. 后向差分 后向差分的映射关系为：&#xA;$$ s \leftarrow \frac{z-1}{Tz} $$&#xA;从s平面到z平面上来看的话，这实际上是将s平面的左半平面映射到z平面的以(0.5,0)为圆心，半径为0.5的圆中。所以原来稳定的系统，经过后向差分之后，一定是稳定的，因为该圆在单位圆内；而原来不稳定的系统，有可能被映射到单位圆中，即可能存在原来不稳定的系统经过后向差分离散化之后，是稳定的。&#xA;参考文献中有s平面映射到z平面的图，方便理解，有需要的同学可以查看。&#xA;2. 前向差分 前向差分的映射关系为：&#xA;$$ s \leftarrow \frac{z-1}{T} $$&#xA;从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。&#xA;3. Tustin Method(双线性变换方法：Bilinear Transform) 双线性变换方法的映射关系为：</description>
+      <description>离散化方法的笔记 最近看论文中发现，分析系统的稳定性问题总免不了在s域先分析一下，然后再在z域上分析一下。可是很多论文对于离散化方法却略去不提，直接给出推导出的结果。所以笔者就寻找总结了一下各种离散化方法，总结一下。学通信或者测量的同学，专门学过数字信号处理的话，应该很熟悉的。
+1. 后向差分 后向差分的映射关系为：
+$$ s \leftarrow \frac{z-1}{Tz} $$
+从s平面到z平面上来看的话，这实际上是将s平面的左半平面映射到z平面的以(0.5,0)为圆心，半径为0.5的圆中。所以原来稳定的系统，经过后向差分之后，一定是稳定的，因为该圆在单位圆内；而原来不稳定的系统，有可能被映射到单位圆中，即可能存在原来不稳定的系统经过后向差分离散化之后，是稳定的。
+参考文献中有s平面映射到z平面的图，方便理解，有需要的同学可以查看。
+ 2. 前向差分 前向差分的映射关系为：
+$$ s \leftarrow \frac{z-1}{T} $$
+从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。
+ 3.</description>
     </item>
+    
   </channel>
 </rss>

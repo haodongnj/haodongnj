@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Realtime on Ramblings from Hao</title>
+    <title>realtime on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/tags/realtime/</link>
-    <description>Recent content in Realtime on Ramblings from Hao</description>
-    <generator>Hugo</generator>
+    <description>Recent content in realtime on Ramblings from Hao</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 12 Jun 2019 23:50:56 +0800</lastBuildDate>
-    <atom:link href="https://haodongnj.github.io/haodongnj/tags/realtime/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jun 2019 23:50:56 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/tags/realtime/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>树莓派实时内核编译与测试</title>
       <link>https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/</link>
       <pubDate>Wed, 12 Jun 2019 23:50:56 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/rpi-rt-kernel/</guid>
-      <description>1. 简介 本文档主要根据LeMaRiva的博客内容整理并基于最新的rt分支代码复现，简述以下2个方面：&#xA;如何为树莓派编译实时内核 测试实时内核的进程调度延时性能 实验所需硬件：&#xA;树莓派3B 8G TF卡 2. 编译 1.获取代码和工具：&#xA;# From LeMaRiva mkdir rpi-rt cd rpi-rt mkdir rt-kernel # 用于存放编译产生的文件 cd rt-kernel mkdir boot cd .</description>
+      <description>1. 简介 本文档主要根据LeMaRiva的博客内容整理并基于最新的rt分支代码复现，简述以下2个方面：
+ 如何为树莓派编译实时内核 测试实时内核的进程调度延时性能  实验所需硬件：
+ 树莓派3B 8G TF卡  2. 编译 1.获取代码和工具：
+# From LeMaRiva mkdir rpi-rt cd rpi-rt mkdir rt-kernel # 用于存放编译产生的文件 cd rt-kernel mkdir boot cd .</description>
     </item>
+    
   </channel>
 </rss>
