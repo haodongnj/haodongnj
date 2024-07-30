@@ -4,18 +4,16 @@
     <title>5900x on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/tags/5900x/</link>
     <description>Recent content in 5900x on Ramblings from Hao</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 21 Jun 2021 22:36:50 +0800</lastBuildDate><atom:link href="https://haodongnj.github.io/haodongnj/tags/5900x/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Jun 2021 22:36:50 +0800</lastBuildDate>
+    <atom:link href="https://haodongnj.github.io/haodongnj/tags/5900x/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>台式机折腾记</title>
       <link>https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/</link>
       <pubDate>Mon, 21 Jun 2021 22:36:50 +0800</pubDate>
-      
       <guid>https://haodongnj.github.io/haodongnj/post/ryzen-5900x-pc/</guid>
-      <description>配置 趁着618攒了一台主机，犹豫了很久还是决定上车AMD，配置如下：
- CPU: AMD Ryzen-9 5900x 主板：TUF Gaming X570-Plus WIFI 硬盘：  1TB SSD KC2500 4TB HDD 西部数据蓝盘   Fury 32GB DDR4 3600MHz 美商海盗船AIR540中塔机箱 美商海盗船HX1200，1200W电源 GTX 750Ti显卡（等矿难）  装机的过程略去不表。记录一些配置工作：</description>
+      <description>配置 趁着618攒了一台主机，犹豫了很久还是决定上车AMD，配置如下：&#xA;CPU: AMD Ryzen-9 5900x 主板：TUF Gaming X570-Plus WIFI 硬盘： 1TB SSD KC2500 4TB HDD 西部数据蓝盘 Fury 32GB DDR4 3600MHz 美商海盗船AIR540中塔机箱 美商海盗船HX1200，1200W电源 GTX 750Ti显卡（等矿难） 装机的过程略去不表。记录一些配置工作：</description>
     </item>
-    
   </channel>
 </rss>

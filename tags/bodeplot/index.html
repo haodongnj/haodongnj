@@ -38,7 +38,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj/">
                         Ramblings from Hao
                     </a>
                 
@@ -46,7 +46,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://haodongnj.github.io/haodongnj">Home</a>
+                    <a class="" href="https://haodongnj.github.io/haodongnj/">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -96,12 +96,14 @@
 
         <div class="post-content">
             在当初学《自动控制原理》的时候，并没有去理解公式背后的意义，囫囵吞枣式地做题、计算、画图。现在想来，传递函数的计算、根轨迹的绘制甚至是伯德图的快速绘制方法都记不得了，但是在实践和仿真中，对于概念的理解更深入了些，所以写下。本文从伯德图说起，讲了以下3个方面：
- 伯德图表示什么 开环伯德图表示什么 伯德积分定理意味着什么  伯德图表示什么 伯德图是从频域的概念来描述系统的性质、表现的。如果我们考虑最简单的系统——比例环节：
+伯德图表示什么 开环伯德图表示什么 伯德积分定理意味着什么 伯德图表示什么 伯德图是从频域的概念来描述系统的性质、表现的。如果我们考虑最简单的系统——比例环节：
 $$G_{p} = K_{p}$$
 当 $K_{p} = 1$ 时，其传递函数如下图所示:
- 那么这张图代表什么呢？代表着任意频率的正弦信号通过比例环节之后输出的信号的幅值依然不变——增益为0dB；同时输出信号和输入信号是同相位的，没有相位延迟。
+那么这张图代表什么呢？代表着任意频率的正弦信号通过比例环节之后输出的信号的幅值依然不变——增益为0dB；同时输出信号和输入信号是同相位的，没有相位延迟。
 那么如果我们考虑常见的一阶惯性环节呢：
-$$ G_{rc} = \frac{1}{T_{s}s + 1} $$……
+$$ G_{rc} = \frac{1}{T_{s}s + 1} $$
+令$T_{s}=0.1$时，一节惯性环节的伯德图是什么样子的呢？
+可见，一阶惯性环节在低频处的增益近似为0dB，而随着频率的增加，增益逐渐下降，而相位也随着频率的增加而滞后，相位滞后的极限为90°。其实一阶惯性环节这样的传递特性对应于电阻电容串联的电路，系统输入为施加在串联阻容上的电压；系统输出为电容两端的电压。如果输入电压为直流电压，那么电容的稳态电压就是直流电压；而如果施加低频正弦电压，那么输出的信号的衰减和相位滞后就会很小；而如果施加高频正弦信号的话，那么输出信号的幅度相对于输入信号就会产生衰减，相位滞后也会随之增大。……
             <p class="readmore"><a href="https://haodongnj.github.io/haodongnj/post/bodeplot/" target="_blank">Continue reading</a></p>
         </div>
     </article>
@@ -117,7 +119,7 @@ $$ G_{rc} = \frac{1}{T_{s}s + 1} $$……
 
                     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
+        &copy; 2024 <a href="https://haodongnj.github.io/haodongnj/">Ramblings from Hao By Hao Dong</a>
         
     </div>
     <br />
@@ -150,7 +152,7 @@ $$ G_{rc} = \frac{1}{T_{s}s + 1} $$……
         <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -227,11 +229,11 @@ $$ G_{rc} = \frac{1}{T_{s}s + 1} $$……
     
     <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">Debluring</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">Descretization-Method</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">Frequency-Domain</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
     
@@ -239,13 +241,13 @@ $$ G_{rc} = \frac{1}{T_{s}s + 1} $$……
     
     <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">Realtime</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">Stability</a>
     
 </div>
     </section>
