@@ -41,7 +41,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://haodongnj.github.io/haodongnj/">
+                    <a id="logo" href="https://haodongnj.github.io/haodongnj">
                         Ramblings from Hao
                     </a>
                 
@@ -49,7 +49,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://haodongnj.github.io/haodongnj/">Home</a>
+                    <a class="current" href="https://haodongnj.github.io/haodongnj">Home</a>
                     
                     <a  href="https://haodongnj.github.io/haodongnj/archives/" title="存档">存档</a>
                     
@@ -93,14 +93,6 @@
 <p>实现的思路非常简单，那就是可以根据消息对应的录制时间戳和消息内部的时间戳（其实一般前者应该就够了），来更新虚拟的时间戳，并将这个虚拟时间戳通过共享内存的方式共享给其他进程。这样的话，其他进程就可以通过读取共享内存的方式来获取虚拟时间戳。</p>
 <p>该虚拟时间戳，可以通过劫持<code>libc</code>中的<code>gettimeofday</code>、<code>clock_gettime</code>等函数来实现，这样的话，就可以在不修改原有代码的情况下，来实现对系统时间戳的劫持；这可以通过将动态库指定到<code>LD_PRELOAD</code>的方式来实现。</p>
 <p>具体原型代码实现可见 <a href="https://github.com/haodongnj/playground/tree/master/utils/virtual_timestamp">Virtual timestamp</a>。该实现仅为虚拟时间戳多进程更新和共享的原型验证，实际应用中还需要考虑更多的问题，比如定时器回调的处理，进程异常退出后共享内存的释放等等。</p>
-<p>其实ROS在设计中是采用 <code>/clock</code> topic 来发布时间戳的(<a href="https://design.ros2.org/articles/clock_and_time.html">ROS 2 Design: Clock and Time</a>)，这个主要受到网络通信延时的影响。共享内存的方式有可能会更快，不过没有考虑多机通信的情况。一般回放数据的时候，都是在一个机器上进行的，所以这个问题应该不大；要是真的有多机通信的需求，也估计还得靠消息传递的方式来实现。</p>
-<p>时间戳在回放过程中是个比较重要的问题，这影响到功能逻辑的正确性。例如<a href="https://discourse.ros.org/t/timestamps-and-rosbags-discussing-an-alternative-to-clock-and-use-sim-time/3238">Timestamps and rosbags: discussing an alternative to clock and use_sim_time</a>这里就谈到了录制消息时间戳乱序的问题，里面提到需要对文件进行后处理，来保证时间戳的顺序性。所以关于回放过程中的时间戳问题，还是要根据具体的应用场景来进行设计。</p>
-<h2 id="参考">参考</h2>
-<ol>
-<li><a href="https://github.com/haodongnj/playground/tree/master/utils/virtual_timestamp">Virtual timestamp</a></li>
-<li><a href="https://design.ros2.org/articles/clock_and_time.html">ROS 2 Design: Clock and Time</a></li>
-<li><a href="https://discourse.ros.org/t/timestamps-and-rosbags-discussing-an-alternative-to-clock-and-use-sim-time/3238">Timestamps and rosbags: discussing an alternative to clock and use_sim_time</a></li>
-</ol>
 
         </div>
 
@@ -145,7 +137,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://haodongnj.github.io/haodongnj/">Ramblings from Hao By Hao Dong</a>
+        &copy; 2025 <a href="https://haodongnj.github.io/haodongnj">Ramblings from Hao By Hao Dong</a>
         
     </div>
     <br />
@@ -263,7 +255,7 @@ div.highlight:hover .copy-code,pre:hover .copy-code {
         <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj/">
+      <input type="hidden" name="sitesearch" value="https://haodongnj.github.io/haodongnj">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -271,6 +263,10 @@ div.highlight:hover .copy-code,pre:hover .copy-code {
     <section class="widget">
         <h3 class="widget-title">Latest articles</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://haodongnj.github.io/haodongnj/post/learning_rl/" title="学习强化学习记录" target="_blank">学习强化学习记录</a>
+    </li>
     
     <li>
         <a href="https://haodongnj.github.io/haodongnj/post/virtual_time/" title="Virtual time，多进程共享虚拟时间原型验证" target="_blank">Virtual time，多进程共享虚拟时间原型验证</a>
@@ -308,17 +304,13 @@ div.highlight:hover .copy-code,pre:hover .copy-code {
         <a href="https://haodongnj.github.io/haodongnj/post/matlab-sfunction/" title="Windows的MATLAB中用C语言写SFunction的一些坑" target="_blank">Windows的MATLAB中用C语言写SFunction的一些坑</a>
     </li>
     
-    <li>
-        <a href="https://haodongnj.github.io/haodongnj/post/pr-control/" title="C Language Implementation for Proportional-Resonant Controller" target="_blank">C Language Implementation for Proportional-Resonant Controller</a>
-    </li>
-    
 </ul>
     </section>
 
     
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/categories/'>Categories</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/categories/'>categories</a></h3>
 <ul class="widget-list">
     
     <li><a href="https://haodongnj.github.io/haodongnj/categories/control/">Control (4)</a></li>
@@ -331,7 +323,7 @@ div.highlight:hover .copy-code,pre:hover .copy-code {
     </section>
 
     <section class="widget">
-        <h3 class="widget-title"><a href='/haodongnj/tags/'>Tags</a></h3>
+        <h3 class="widget-title"><a href='/haodongnj/tags/'>tags</a></h3>
 <div class="tagcloud">
     
     <a href="https://haodongnj.github.io/haodongnj/tags/5900x/">5900x</a>
@@ -340,11 +332,11 @@ div.highlight:hover .copy-code,pre:hover .copy-code {
     
     <a href="https://haodongnj.github.io/haodongnj/tags/control/">Control</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">Debluring</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/debluring/">debluring</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">Descretization-Method</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/descretization-method/">descretization-method</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">Frequency-Domain</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/frequency-domain/">frequency-domain</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/matlab/">MATLAB</a>
     
@@ -352,13 +344,13 @@ div.highlight:hover .copy-code,pre:hover .copy-code {
     
     <a href="https://haodongnj.github.io/haodongnj/tags/psf/">PSF</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">Realtime</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/realtime/">realtime</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/rpi/">RPi</a>
     
     <a href="https://haodongnj.github.io/haodongnj/tags/simulation/">Simulation</a>
     
-    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">Stability</a>
+    <a href="https://haodongnj.github.io/haodongnj/tags/stability/">stability</a>
     
 </div>
     </section>

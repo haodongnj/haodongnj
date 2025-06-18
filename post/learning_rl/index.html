@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Richardson-Lucy Deconvolution | Ramblings from Hao</title>
-    <meta property="og:title" content="Richardson-Lucy Deconvolution - Ramblings from Hao">
+    <title>学习强化学习记录 | Ramblings from Hao</title>
+    <meta property="og:title" content="学习强化学习记录 - Ramblings from Hao">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2021-02-03T00:38:40&#43;08:00'>
+    <meta property="article:published_time" content='2025-06-18T23:32:59&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-02-03T00:38:40&#43;08:00'>
+    <meta property="article:modified_time" content='2025-06-18T23:32:59&#43;08:00'>
         
     <meta name="Keywords" content="Blog,Control">
-    <meta name="description" content="Richardson-Lucy Deconvolution">
+    <meta name="description" content="学习强化学习记录">
         
     <meta name="author" content="Hao Dong">
-    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/rl-deconvolve/">
+    <meta property="og:url" content="https://haodongnj.github.io/haodongnj/post/learning_rl/">
     <link rel="shortcut icon" href='/haodongnj/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/haodongnj/css/normalize.css'>
@@ -71,11 +71,11 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">Richardson-Lucy Deconvolution</h1>
+            <h1 class="post-title">学习强化学习记录</h1>
         </header>
         
-  <time datetime="2021-02-02T16:38:40Z" class="post-meta meta-date dt-published">
-    2021-02-03
+  <time datetime="2025-06-18T15:32:59Z" class="post-meta meta-date dt-published">
+    2025-06-18
   </time>
 
 
@@ -83,78 +83,10 @@
         
         
         <div class="post-content">
-            <h2 id="rl反卷积都干了些啥">RL反卷积都干了些啥</h2>
-<p>RL反卷积是通过迭代的方法来优化损失函数，利用噪声性质和成像系统的点分布函数(Point Spread Function)对图像进行去噪的一种方法。
-损失函数是啥样的呢？</p>
-<p>$$
-J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF))
-$$</p>
-<p>且有：</p>
-<ul>
-<li>$J$，损失函数，为最小化的目标</li>
-<li>$O(x,y)$，不受椒盐噪声和点分布函数模糊效应影响的理想原始图像</li>
-<li>$PSF(x,y)$，Point Spread Function，点分布函数</li>
-<li>$I(x,y)$，实际拍摄到的图像</li>
-<li>$**$，二维卷积</li>
-<li>$\cdot$，按元素相乘</li>
-</ul>
-<p>既然要优化$J(O)$，那么就对O求导：</p>
-<p>$$
-\nabla J = [1 - \frac{I}{O**PSF}] ** PSF^{T}
-$$</p>
-<p>利用迭代法，就可以使代价函数最小，如下：</p>
-<p>$$
-O_{k+1} = O_{k} - \alpha \cdot \nabla J
-$$</p>
-<p>简化可得：</p>
-<p>$$
-O_{k+1} = O_{k} \cdot [\frac{I}{O_{k} ** PSF} ** PSF^{T}]
-$$</p>
-<p>按照这个迭代式，一般RL反卷积算法迭代个十几次就差不多了。</p>
-<p>但是!</p>
-<p>为什么要这么干呢？代价函数是怎么来的呢？
-这和光学设备的成像的噪声性质有关系。</p>
-<h2 id="数码噪点的泊松分布">数码噪点的泊松分布</h2>
-<pre><code>由于光线具有波粒二象性，在进行数字成像时，在像素点上的光子数量在概率上呈泊松分布。
-</code></pre>
-<p>对于某个像素点而言，曝光时的光电子数量$i$满足泊松分布：</p>
-<p>$$
-p(i) = e^{-\lambda} \cdot \frac{\lambda ^{i}}{i!}
-$$</p>
-<p>其中，$p(i)$表示像素接收到i个光电子的概率，而$\lambda$表示像素接收到的光电子数量的期望值（平均值）。</p>
-<h2 id="问题的转化极大似然估计">问题的转化：极大似然估计</h2>
-<p>考虑整个图像的联合概率为每个像素的概率的乘积：</p>
-<p>$$
-P(I) = \prod e^{-\Lambda} \cdot \frac{\Lambda^{I}}{I!}
-$$</p>
-<p>且有：</p>
-<ul>
-<li>$P(I)$：整个图像每个像素的联合概率</li>
-<li>$I$：实际拍摄到的图像数据，包含噪声，M行N列</li>
-<li>$\Lambda$：无泊松噪声的理想图像数据，M行N列</li>
-</ul>
-<p>那么很自然的，才用极大似然估计，对上式取对数，化乘为加：</p>
-<p>$$
-ln(P(I)) = - \Sigma (\Lambda - I \cdot ln(\Lambda) + ln(I!))
-$$</p>
-<p>其中，$ln(I！)$是常数项，而对于$\Lambda$，有：</p>
-<p>$$
-\Lambda = O ** PSF
-$$</p>
-<p>去掉到最大似然估计函数前面的负号以及常数项，代入上式就可以得到最小化目标的损失函数：</p>
-<p>$$
-J(O) = \Sigma(O**PSF - I \cdot ln(O ** PSF))
-$$</p>
-<h2 id="小结">小结</h2>
-<p>最大似然估计大法好。一些机器学习方法里面的贝叶斯方法也用到了最大似然估计来求参，真是有种触类旁通的感觉呢。</p>
-<h2 id="参考文献">参考文献</h2>
-<ol>
-<li><a href="https://www.strollswithmydog.com/elements-of-richardson-lucy-deconvolution/">Elements of Richardson-Lucy Deconvolution</a></li>
-<li><a href="https://www.strollswithmydog.com/richardson-lucy-algorithm/">The Richardson-Lucy Algorithm</a></li>
-<li><a href="https://www.strollswithmydog.com/photographic-sensor-simulation/">Photographic Sensor Simulation</a></li>
-<li><a href="https://qiuliang.com/digital_photography_tutorial/understand_digital_noise.htm">入门——理解数码噪点：产生原因及对拍摄的指导意义</a></li>
-<li><a href="https://www.osapublishing.org/josa/abstract.cfm?uri=josa-62-1-55">Richardson W H. Bayesian-based iterative method of image restoration[J]. JoSA, 1972, 62(1): 55-59.</a></li>
-</ol>
+            <h1 id="2025-06">2025-06</h1>
+<p>之前在Coursera上过了一遍 <a href="https://www.coursera.org/specializations/reinforcement-learning">Reinforcement Learning Specialization</a>，然后也翻了<code>强化学习的数学原理</code>这本书，对其中的一些概念更理解了些。
+这本书有对应的<a href="https://github.com/MathFoundationRL/Book-Mathematical-Foundation-of-Reinforcement-Learning">英文版</a>，另外有中文和英文的教学视频。因为之前看过视频，所以就直接看书了。
+书中介绍的脉络非常清晰，环环相扣。如果我刚开始入门强化学习的话，先看这本书然后再动手实操或者看论文应该会事半功倍。虽然书中给出很多的公式与证明，但是作者都给出了清晰的解释，对于培养<code>know how</code>非常有帮助。</p>
 
         </div>
 
@@ -167,15 +99,15 @@ $$</p>
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/haodongnj/about/">关于我</a></li>
+        <li><a href="/haodongnj/post/virtual_time/">Virtual time，多进程共享虚拟时间原型验证</a></li>
         
-        <li><a href="/haodongnj/post/rpi-rt-kernel/">树莓派实时内核编译与测试</a></li>
+        <li><a href="/haodongnj/post/cling-jupyter-notebook/">Cling Jupyter Notebook</a></li>
         
-        <li><a href="/haodongnj/post/bodeplot/">从伯德图说起</a></li>
+        <li><a href="/haodongnj/post/know_how_to_access_name_in_templated_base_classes/">Know how to access name in templated base classes</a></li>
         
-        <li><a href="/haodongnj/post/matlab-sfunction/">Windows的MATLAB中用C语言写SFunction的一些坑</a></li>
+        <li><a href="/haodongnj/post/kf/">Kalman Filter小结</a></li>
         
-        <li><a href="/haodongnj/post/pr-control/">C Language Implementation for Proportional-Resonant Controller</a></li>
+        <li><a href="/haodongnj/post/ryzen-5900x-pc/">台式机折腾记</a></li>
         
     </ul>
 </div>
@@ -183,13 +115,7 @@ $$</p>
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/haodongnj/tags/debluring' target="_blank">debluring</a></li>
-                
-                <li><a href='/haodongnj/tags/psf' target="_blank">PSF</a></li>
-                
-            </ul>
+            No tags
             
         </div>
     </article>

@@ -4,37 +4,68 @@
     <title>Control on Ramblings from Hao</title>
     <link>https://haodongnj.github.io/haodongnj/categories/control/</link>
     <description>Recent content in Control on Ramblings from Hao</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 31 Aug 2018 00:43:25 +0800</lastBuildDate>
-    <atom:link href="https://haodongnj.github.io/haodongnj/categories/control/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://haodongnj.github.io/haodongnj/categories/control/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>从伯德图说起</title>
       <link>https://haodongnj.github.io/haodongnj/post/bodeplot/</link>
       <pubDate>Fri, 31 Aug 2018 00:43:25 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/bodeplot/</guid>
-      <description>在当初学《自动控制原理》的时候，并没有去理解公式背后的意义，囫囵吞枣式地做题、计算、画图。现在想来，传递函数的计算、根轨迹的绘制甚至是伯德图的快速绘制方法都记不得了，但是在实践和仿真中，对于概念的理解更深入了些，所以写下。本文从伯德图说起，讲了以下3个方面：&#xA;伯德图表示什么 开环伯德图表示什么 伯德积分定理意味着什么 伯德图表示什么 伯德图是从频域的概念来描述系统的性质、表现的。如果我们考虑最简单的系统——比例环节：&#xA;$$G_{p} = K_{p}$$&#xA;当 $K_{p} = 1$ 时，其传递函数如下图所示:&#xA;那么这张图代表什么呢？代表着任意频率的正弦信号通过比例环节之后输出的信号的幅值依然不变——增益为0dB；同时输出信号和输入信号是同相位的，没有相位延迟。&#xA;那么如果我们考虑常见的一阶惯性环节呢：&#xA;$$ G_{rc} = \frac{1}{T_{s}s + 1} $$&#xA;令$T_{s}=0.1$时，一节惯性环节的伯德图是什么样子的呢？&#xA;可见，一阶惯性环节在低频处的增益近似为0dB，而随着频率的增加，增益逐渐下降，而相位也随着频率的增加而滞后，相位滞后的极限为90°。其实一阶惯性环节这样的传递特性对应于电阻电容串联的电路，系统输入为施加在串联阻容上的电压；系统输出为电容两端的电压。如果输入电压为直流电压，那么电容的稳态电压就是直流电压；而如果施加低频正弦电压，那么输出的信号的衰减和相位滞后就会很小；而如果施加高频正弦信号的话，那么输出信号的幅度相对于输入信号就会产生衰减，相位滞后也会随之增大。</description>
+      <description>在当初学《自动控制原理》的时候，并没有去理解公式背后的意义，囫囵吞枣式地做题、计算、画图。现在想来，传递函数的计算、根轨迹的绘制甚至是伯德图的快速绘制方法都记不得了，但是在实践和仿真中，对于概念的理解更深入了些，所以写下。本文从伯德图说起，讲了以下3个方面：
+ 伯德图表示什么 开环伯德图表示什么 伯德积分定理意味着什么  伯德图表示什么 伯德图是从频域的概念来描述系统的性质、表现的。如果我们考虑最简单的系统——比例环节：
+$$G_{p} = K_{p}$$
+当 $K_{p} = 1$ 时，其传递函数如下图所示:
+ 那么这张图代表什么呢？代表着任意频率的正弦信号通过比例环节之后输出的信号的幅值依然不变——增益为0dB；同时输出信号和输入信号是同相位的，没有相位延迟。
+那么如果我们考虑常见的一阶惯性环节呢：
+$$ G_{rc} = \frac{1}{T_{s}s + 1} $$</description>
     </item>
+    
     <item>
       <title>C Language Implementation for Proportional-Resonant Controller</title>
       <link>https://haodongnj.github.io/haodongnj/post/pr-control/</link>
       <pubDate>Fri, 22 Jun 2018 02:13:54 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/pr-control/</guid>
-      <description>1. Introduction to Proportional-Resonant Controller First, let&amp;rsquo;s see the transfer function of PR controller and its bode diagram:&#xA;$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$</description>
+      <description>1. Introduction to Proportional-Resonant Controller First, let&amp;rsquo;s see the transfer function of PR controller and its bode diagram:
+$$ G_{PR}(s)=K_{p} + \frac{K_{r}s}{s^{2} + \omega_{r}^2} $$</description>
     </item>
+    
     <item>
       <title>Discretization method(离散化方法)</title>
       <link>https://haodongnj.github.io/haodongnj/post/descretization-method/</link>
       <pubDate>Fri, 27 Oct 2017 01:58:28 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/descretization-method/</guid>
-      <description>离散化方法的笔记 最近看论文中发现，分析系统的稳定性问题总免不了在s域先分析一下，然后再在z域上分析一下。可是很多论文对于离散化方法却略去不提，直接给出推导出的结果。所以笔者就寻找总结了一下各种离散化方法，总结一下。学通信或者测量的同学，专门学过数字信号处理的话，应该很熟悉的。&#xA;1. 后向差分 后向差分的映射关系为：&#xA;$$ s \leftarrow \frac{z-1}{Tz} $$&#xA;从s平面到z平面上来看的话，这实际上是将s平面的左半平面映射到z平面的以(0.5,0)为圆心，半径为0.5的圆中。所以原来稳定的系统，经过后向差分之后，一定是稳定的，因为该圆在单位圆内；而原来不稳定的系统，有可能被映射到单位圆中，即可能存在原来不稳定的系统经过后向差分离散化之后，是稳定的。&#xA;参考文献中有s平面映射到z平面的图，方便理解，有需要的同学可以查看。&#xA;2. 前向差分 前向差分的映射关系为：&#xA;$$ s \leftarrow \frac{z-1}{T} $$&#xA;从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。&#xA;3. Tustin Method(双线性变换方法：Bilinear Transform) 双线性变换方法的映射关系为：</description>
+      <description>离散化方法的笔记 最近看论文中发现，分析系统的稳定性问题总免不了在s域先分析一下，然后再在z域上分析一下。可是很多论文对于离散化方法却略去不提，直接给出推导出的结果。所以笔者就寻找总结了一下各种离散化方法，总结一下。学通信或者测量的同学，专门学过数字信号处理的话，应该很熟悉的。
+1. 后向差分 后向差分的映射关系为：
+$$ s \leftarrow \frac{z-1}{Tz} $$
+从s平面到z平面上来看的话，这实际上是将s平面的左半平面映射到z平面的以(0.5,0)为圆心，半径为0.5的圆中。所以原来稳定的系统，经过后向差分之后，一定是稳定的，因为该圆在单位圆内；而原来不稳定的系统，有可能被映射到单位圆中，即可能存在原来不稳定的系统经过后向差分离散化之后，是稳定的。
+参考文献中有s平面映射到z平面的图，方便理解，有需要的同学可以查看。
+ 2. 前向差分 前向差分的映射关系为：
+$$ s \leftarrow \frac{z-1}{T} $$
+从s平面到z平面上来看，其实是将左半平面映射到了z平面上直线 $z=1$ 的左边平面上。所以原来在s域上稳定的系统经过前向差分之后的离散系统可能是不稳定的。
+ 3.</description>
     </item>
+    
     <item>
       <title>稳定性和振荡的频域理解</title>
       <link>https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/</link>
       <pubDate>Fri, 31 Mar 2017 01:57:46 +0800</pubDate>
+      
       <guid>https://haodongnj.github.io/haodongnj/post/stability-in-frequency-domain/</guid>
-      <description>系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？&#xA;因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:&#xA;fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys) 可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。&#xA;考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。&#xA;对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。&#xA;毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)</description>
+      <description>系统截止频率对应的相角与-180°相差的度数成为相角裕度，为何？
+因为所谓相角裕度与增益裕度都是基于频域的控制系统稳定性指标。倘若系统的开环传递函数的截止频率相移为-180°，那么由于负反馈对于正弦波自带180°的相位滞后，那么对于系统而言就相当于正反馈，则系统将处于自激振荡状态。举个简单的例子，前向通道和反馈通道分别为积分环节:
+fw = tf(1, [1, 0]); fd = fw ; sys = feedback(fw, fd); impulse(sys)  可以看到，系统的脉冲响应是周期为6.28的正弦波，即当存在轻微扰动时，系统就会进入自激振荡状态（因为系统临界稳定）；而当系统的输入为0的时候，是输出也为0， 这可以理解为系统无能量输入，所以系统也就不会输出响应。想起模电中运用正反馈构成自激振荡电路的原理，实际工作环境中存在着能量的传播，所以自激振荡电路总能产生振荡的正弦波。理解这一点，对数稳定判据以及奈奎斯特稳定判据就很好理解了。
+ 考虑下图显示的典型的反馈控制系统框图，如果将反馈处切开，那么从给定（Setpoint）到反馈的传递函数实际上就是自控概念中的开环传递函数了。
+ 对于正弦信号而言，开环传递函数的幅频特性实际上反映的是反馈回来的信号的放大倍数（也可能是缩小）和相角延迟，这个和系统的稳定性有着密切的关系。如果反馈回来的信号为-180°，并且增益也比较大（大于等于1），那么系统就自然不会稳定。然而在实际系统中，由于功率（能量）的限制，噪声的影响，自激振荡这种状态就很好解释了。
+毕竟开环传递函数研究的是反馈相当于系统给定的性质，把握了这句话，电工出身的人所说的环路增益研究系统稳定性就很好理解了。:)</description>
     </item>
+    
   </channel>
 </rss>
